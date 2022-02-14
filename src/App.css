@@ -1,0 +1,43 @@
+body {
+	background-color: #F3F3F3;
+	font-family: 'Roboto';
+}
+
+.dms-button {
+	background: #63B9DE;
+	box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+	border-radius: 10px;
+	border: none;
+	padding: 12px;
+	color: white;
+	cursor: pointer;
+	font-family: "Roboto";
+}
+
+.dms-icon-button {
+	padding: 14px 20px;
+    cursor: pointer;
+}
+
+.dms-button:hover {
+	background-color: #2481a8;
+}
+
+.dms-header {
+	background-color: #293C4E;
+	height: 60px;
+	color: #63B9DE;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.dms-header-title {
+	color: #63B9DE;
+	font-size: 22px;
+	margin: 17px 15px;
+}
+
+.flex-row-sb {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
