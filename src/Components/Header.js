@@ -6,7 +6,7 @@ export const Header = () => {
     return(
         <div className="dms-header flex-row-sb">
             <p className="dms-header-title">Data Mining System</p>
-            <FontAwesomeIcon icon={faUserCircle} size="2x" className="dms-icon-button"/>
+            <FontAwesomeIcon icon={faUserCircle} size="2x" className="dms-icon"/>
         </div>
     );
 }

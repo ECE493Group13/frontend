@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from '../Components/Button';
 import {Header} from '../Components/Header';
+import {KeywordBar} from '../Components/KeywordBar';
 
 export const HomePage = () => {
     const handleFormSubmit = () => {
@@ -20,6 +21,7 @@ export const HomePage = () => {
     return (
         <div>
             <Header></Header>
+            <KeywordBar />
             <div style={{paddingTop: '50px', display: 'block', textAlign: 'center'}}>
                 <Button buttonText="Call Flask API" onClick={handleFormSubmit}></Button>
             </div>
