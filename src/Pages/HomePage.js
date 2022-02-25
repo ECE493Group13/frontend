@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button} from '../Components/Button';
-import {Header} from '../Components/Header';
-import {KeywordBar} from '../Components/KeywordBar';
+import { Button } from '../Components/Button';
+import { Header } from '../Components/Header';
+import { KeywordBar } from '../Components/KeywordBar';
 
 export const HomePage = () => {
     const handleFormSubmit = () => {
