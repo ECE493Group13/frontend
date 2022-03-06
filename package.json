@@ -28,12 +28,12 @@
       "react-app",
       "react-app/jest"
     ],
-    "rules": {
-      "additional-rule": "warn"
-    },
+    "rules": {},
     "overrides": [
       {
-        "files": ["**/*.ts?(x)"],
+        "files": [
+          "**/*.ts?(x)"
+        ],
         "rules": {
           "additional-typescript-only-rule": "warn"
         }
@@ -61,5 +61,8 @@
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0"
   }
 }
