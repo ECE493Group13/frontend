@@ -1,6 +1,5 @@
-import './App.css';
-import {LoginPage} from './Pages/LoginPage';
-
+import "./App.css";
+import { LoginPage } from "./Pages/LoginPage";
 
 function App() {
   return (
@@ -8,8 +7,7 @@ function App() {
       <LoginPage />
     </div>
   );
-  
-  
+
   // return (
   //   <div className="App">
   //     <header className="App-header">

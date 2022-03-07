@@ -1,135 +1,135 @@
 body {
-	background-color: #F3F3F3;
-	font-family: 'Roboto';
+  background-color: #f3f3f3;
+  font-family: "Roboto";
 }
 
 .dark-background {
-    background-color: #293C4E;
-    width: 100%;
-    height: 100%;
-    position: absolute;
+  background-color: #293c4e;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 
 .dms-button {
-	background: #63B9DE;
-	box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-	border-radius: 10px;
-	border: none;
-	padding: 12px 24px;
-	color: white;
-	cursor: pointer;
-	font-family: "Roboto";
+  background: #63b9de;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 10px;
+  border: none;
+  padding: 12px 24px;
+  color: white;
+  cursor: pointer;
+  font-family: "Roboto";
 }
 
 .dms-icon {
-	padding: 14px 20px;
-    cursor: pointer;
+  padding: 14px 20px;
+  cursor: pointer;
 }
 
 .dms-button:hover {
-	background-color: #2481a8;
+  background-color: #2481a8;
 }
 
 .dms-header {
-	background-color: #293C4E;
-	height: 60px;
-	color: #63B9DE;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #293c4e;
+  height: 60px;
+  color: #63b9de;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .dms-header-title {
-	color: #63B9DE;
-	font-size: 22px;
-	margin: 17px 15px;
+  color: #63b9de;
+  font-size: 22px;
+  margin: 17px 15px;
 }
 
 .dms-keyword-bar {
-	margin: 20px;
-    background: white;
-    border: 2px solid #F3F3F3;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 15%);
-    border-radius: 10px;
-    width: 100%;
-    height: 45px;
-	padding-left: 15px;
+  margin: 20px;
+  background: white;
+  border: 2px solid #f3f3f3;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 15%);
+  border-radius: 10px;
+  width: 100%;
+  height: 45px;
+  padding-left: 15px;
 }
 
 .dms-keyword-bar:focus {
-    outline: none;
+  outline: none;
 }
 
 .keyword-submit-button {
-	background-color: #63B9DE;
-	border-radius: 50%;
-	width: 37px;
-	height: 35px;
-	border: none;
-	box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-	margin: auto 20px auto 0px;
+  background-color: #63b9de;
+  border-radius: 50%;
+  width: 37px;
+  height: 35px;
+  border: none;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  margin: auto 20px auto 0px;
 }
 
 .keyword-submit-button:hover {
-	background-color: #2481a8;
+  background-color: #2481a8;
 }
 
 .flex-row-sb {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .flex-column {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .login-form-container {
-    background-color: white;
-    width: 550px;
-    top: 45%;
-    height: 320px;
-    margin: auto;
-    position: relative;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-    border-radius: 10px;
+  background-color: white;
+  width: 550px;
+  top: 45%;
+  height: 320px;
+  margin: auto;
+  position: relative;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  border-radius: 10px;
 }
 
 .login-text-input {
-	background: white;
-    border: 2px solid #F3F3F3;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 15%);
-    border-radius: 10px;
-    width: 70%;
-    height: 45px;
-    padding-left: 15px;
-    display: flex;
-    margin: 20px auto;
-    font-size: 14px;
+  background: white;
+  border: 2px solid #f3f3f3;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 15%);
+  border-radius: 10px;
+  width: 70%;
+  height: 45px;
+  padding-left: 15px;
+  display: flex;
+  margin: 20px auto;
+  font-size: 14px;
 }
 
 .login-text-input:focus {
-    outline: none;
+  outline: none;
 }
 
 .login-form-title {
-	color: #293C4E;
-    text-align: center;
-    font-size: 24px;
-    padding: 40px 0 10px 0;	
+  color: #293c4e;
+  text-align: center;
+  font-size: 24px;
+  padding: 40px 0 10px 0;
 }
 
 .login-form-button {
-	text-align: center;
+  text-align: center;
 }
 
 .request-account-button {
-	color: #2481a8;
-	text-align: center;
-	font-size: 14px;
-	margin-top: 65px;
-	cursor: pointer;
+  color: #2481a8;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 65px;
+  cursor: pointer;
 }
