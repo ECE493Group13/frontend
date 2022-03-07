@@ -6,7 +6,7 @@ export const Header = (showProfileIcon) => {
     return(
         <div className="dms-header flex-row-sb">
             <p className="dms-header-title">Data Mining System</p>
-            {showProfileIcon === {} && <FontAwesomeIcon icon={faUserCircle} size="2x" className="dms-icon"/>}
+            {showProfileIcon.showProfileIcon && <FontAwesomeIcon icon={faUserCircle} size="2x" className="dms-icon"/>}
         </div>
     );
 }
