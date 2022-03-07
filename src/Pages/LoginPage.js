@@ -33,6 +33,10 @@ export const LoginPage = () => {
         navigate('/changePassword');
     }
 
+    const requestAccount = () => {
+        navigate('/requestAccount');
+    }
+
     return (
         <div className='dark-background'>
             <div className='login-form-card-margin-top'>
@@ -45,7 +49,7 @@ export const LoginPage = () => {
                     onSubmit={onLogin}
                     placeholder2IsPass 
                 />
-                <p className='request-account-button'>No account? Get started here</p>
+                <p onClick={requestAccount} className='request-account-button'>No account? Get started here</p>
             </div>
         </div>
     );
