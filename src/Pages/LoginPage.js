@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { DoubleInputFormCard } from '../Components/DoubleInputFormCard';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../constants'
 
 export const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -14,7 +15,7 @@ export const LoginPage = () => {
     }
 
     const onLogin = () => {
-        fetch('http://localhost:4433/auth/login', {
+        fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
             body: JSON.stringify({
                 "username": username,
