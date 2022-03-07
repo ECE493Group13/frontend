@@ -12,7 +12,6 @@ export const RequestAccountPage = () => {
   };
 
   const onRequestAccount = () => {
-    // TODO: Update with URL from api when its ready
     fetch(`${API_BASE_URL}/register`, {
       method: "POST",
       body: JSON.stringify({
