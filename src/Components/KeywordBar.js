@@ -9,8 +9,7 @@ export const KeywordBar = () => {
         e.preventDefault(); // Prevent full page load on form submit
         const keywords = input.split(/\s+/);
         
-        // TODO: Match the URL to the API in Flask app
-        fetch('http://localhost:4433/data/filter', {
+        fetch('http://localhost:4433/filterpaper', {
             method: 'POST',
             body: JSON.stringify({
                 keywords

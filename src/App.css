@@ -84,20 +84,16 @@ body {
 	flex-direction: column;
 }
 
-.login-form-container {
-    background-color: white;
+.dms-double-input-form-container {
+	background-color: white;
     width: 550px;
-    top: 45%;
     height: 320px;
     margin: auto;
-    position: relative;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
     border-radius: 10px;
 }
 
-.login-text-input {
+.dms-double-input-text-input {
 	background: white;
     border: 2px solid #F3F3F3;
     box-sizing: border-box;
@@ -111,25 +107,38 @@ body {
     font-size: 14px;
 }
 
-.login-text-input:focus {
+.dms-double-input-text-input:focus {
     outline: none;
 }
 
-.login-form-title {
+.dms-double-input-form-title {
 	color: #293C4E;
     text-align: center;
     font-size: 24px;
     padding: 40px 0 10px 0;	
 }
 
-.login-form-button {
+.dms-double-input-form-button {
 	text-align: center;
+}
+
+.dms-double-input-form-subtitle {
+	text-align: center;
+    width: 300px;
+    margin: -20px auto 10px;
 }
 
 .request-account-button {
 	color: #2481a8;
 	text-align: center;
 	font-size: 14px;
-	margin-top: 65px;
 	cursor: pointer;
+}
+
+.login-form-card-margin-top {
+	margin-top: 13%;
+}
+
+.change-password-card-margin-top {
+	margin-top: 8%;
 }
