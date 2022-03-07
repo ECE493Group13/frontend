@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE_URL } from '../constants'
 import { Button } from '../Components/Button';
 
 export const LoginPage = () => {
@@ -6,7 +7,7 @@ export const LoginPage = () => {
     const [password, setPasswrod] = useState('');
 
     const onLogin = () => {
-        fetch('http://localhost:4433/auth/login', {
+        fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
             body: JSON.stringify({
                 "username": username,

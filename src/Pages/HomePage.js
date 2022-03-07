@@ -1,11 +1,12 @@
 import React from 'react';
+import { API_BASE_URL } from '../constants'
 import { Button } from '../Components/Button';
 import { Header } from '../Components/Header';
 import { KeywordBar } from '../Components/KeywordBar';
 
 export const HomePage = () => {
     const handleFormSubmit = () => {
-        fetch('http://localhost:4433/data/create', {
+        fetch(`${API_BASE_URL}/data/create`, {
             method: 'POST',
             body: JSON.stringify({
                 name: "callFlaskAPI"
