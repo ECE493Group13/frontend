@@ -3,12 +3,19 @@ body {
 	font-family: 'Roboto';
 }
 
+.dark-background {
+    background-color: #293C4E;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
 .dms-button {
 	background: #63B9DE;
 	box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 	border-radius: 10px;
 	border: none;
-	padding: 12px;
+	padding: 12px 24px;
 	color: white;
 	cursor: pointer;
 	font-family: "Roboto";
@@ -70,4 +77,59 @@ body {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.login-form-container {
+    background-color: white;
+    width: 550px;
+    top: 45%;
+    height: 320px;
+    margin: auto;
+    position: relative;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+}
+
+.login-text-input {
+	background: white;
+    border: 2px solid #F3F3F3;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 15%);
+    border-radius: 10px;
+    width: 70%;
+    height: 45px;
+    padding-left: 15px;
+    display: flex;
+    margin: 20px auto;
+    font-size: 14px;
+}
+
+.login-text-input:focus {
+    outline: none;
+}
+
+.login-form-title {
+	color: #293C4E;
+    text-align: center;
+    font-size: 24px;
+    padding: 40px 0 10px 0;	
+}
+
+.login-form-button {
+	text-align: center;
+}
+
+.request-account-button {
+	color: #2481a8;
+	text-align: center;
+	font-size: 14px;
+	margin-top: 65px;
+	cursor: pointer;
 }

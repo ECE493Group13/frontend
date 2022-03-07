@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE_URL } from '../constants'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
@@ -10,7 +11,7 @@ export const KeywordBar = () => {
         const keywords = input.split(/\s+/);
         
         // TODO: Match the URL to the API in Flask app
-        fetch('http://localhost:4433/data/filter', {
+        fetch(`${API_BASE_URL}/data/filter`, {
             method: 'POST',
             body: JSON.stringify({
                 keywords

@@ -2,7 +2,8 @@ import React from 'react';
 
 export const Button = ({ buttonText, onClick }) => {
     
-    const onclick = () => {
+    const onclick = (e) => {
+        e.preventDefault();
         onClick();
     }
 
