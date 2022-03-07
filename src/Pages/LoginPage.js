@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { DoubleInputFormCard } from '../Components/DoubleInputFormCard';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../constants'
-import { DoubleInputFormCard } from '../Components/DoubleInputFormCard';
-import { useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
     const [username, setUsername] = useState('');
