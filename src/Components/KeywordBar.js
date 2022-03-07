@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE_URL } from '../constants'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
@@ -9,7 +10,8 @@ export const KeywordBar = () => {
         e.preventDefault(); // Prevent full page load on form submit
         const keywords = input.split(/\s+/);
         
-        fetch('http://localhost:4433/filterpaper', {
+        // TODO: Match the URL to the API in Flask app
+        fetch(`${API_BASE_URL}/data/filter`, {
             method: 'POST',
             body: JSON.stringify({
                 keywords

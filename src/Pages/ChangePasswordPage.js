@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { DoubleInputFormCard } from '../Components/DoubleInputFormCard';
 import { Header } from '../Components/Header';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../constants'
 
 export const ChangePasswordPage = () => {
     const [oldPassword, setOldPassword] = useState('');
@@ -15,7 +16,7 @@ export const ChangePasswordPage = () => {
     }
 
     const onChangePassword = () => {
-        fetch('http://localhost:4433/auth/update-password', {
+        fetch(`${API_BASE_URL}/auth/update-password`, {
             method: 'POST',
             body: JSON.stringify({
                 "old_password": oldPassword,
