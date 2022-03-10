@@ -23,7 +23,7 @@ export const HomePage = () => {
 
   return (
     <div>
-      <Header></Header>
+      <Header showProfileIcon></Header>
       <KeywordBar />
       <div
         style={{ paddingTop: "50px", display: "block", textAlign: "center" }}

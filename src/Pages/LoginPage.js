@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import { DoubleInputFormCard } from "../Components/DoubleInputFormCard";
+import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
-import { Button } from "../Components/Button";
 
 export const LoginPage = () => {
   const [username, setUsername] = useState("");
-  const [password, setPasswrod] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const onInputChange = (username, password) => {
+    setUsername(username);
+    setPassword(password);
+  };
 
   const onLogin = () => {
     fetch(`${API_BASE_URL}/auth/login`, {
@@ -22,30 +30,34 @@ export const LoginPage = () => {
         // TODO: do something with the response
         console.log(message);
       });
+
+    // TODO: Hardcoded to go to change password page without verification or checking if first time
+    navigate("/changePassword");
+  };
+
+  const requestAccount = () => {
+    navigate("/requestAccount");
   };
 
   return (
     <div className="dark-background">
-      <div className="login-form-container">
-        <p className="login-form-title">Data Mining System</p>
-        <form onSubmit={onLogin}>
-          <input
-            type="text"
-            placeholder="Username"
-            className="login-text-input"
-            onInput={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="login-text-input"
-            onInput={(e) => setPasswrod(e.target.value)}
-          />
-          <div className="login-form-button">
-            <Button buttonText="Log in" onClick={(e) => onLogin(e)}></Button>
-          </div>
-        </form>
-        <p className="request-account-button">No account? Get started here</p>
+      <div className="login-form-card-margin-top">
+        <DoubleInputFormCard
+          onInputChange={onInputChange}
+          title="Data Mining System"
+          placeholder1="Username"
+          placeholder2="Password"
+          buttonText="Log in"
+          onSubmit={onLogin}
+          placeholder2IsPass
+        />
+        <p
+          id="requestAcctButton"
+          onClick={requestAccount}
+          className="request-account-button"
+        >
+          No account? Get started here
+        </p>
       </div>
     </div>
   );
