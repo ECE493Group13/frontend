@@ -20,10 +20,10 @@ export const DoubleInputFormCard = ({ onInputChange, title, subtitle, placeholde
             <p className="dms-double-input-form-title">{title}</p>
             {subtitle && <p className="dms-double-input-form-subtitle">{subtitle}</p>}
             <form onSubmit={onSubmit}>
-                <input type={placeholder1IsPass ? "password" : "text"} placeholder={placeholder1} className="dms-double-input-text-input" onInput={e => handleChangeInput1(e.target.value)} />
-                <input type={placeholder2IsPass ? "password" : "text"} placeholder={placeholder2} className="dms-double-input-text-input" onInput={e => handleChangeInput2(e.target.value)} />
+                <input id="input1" type={placeholder1IsPass ? "password" : "text"} placeholder={placeholder1} className="dms-double-input-text-input" onInput={e => handleChangeInput1(e.target.value)} />
+                <input id="input2" type={placeholder2IsPass ? "password" : "text"} placeholder={placeholder2} className="dms-double-input-text-input" onInput={e => handleChangeInput2(e.target.value)} />
                 <div className="dms-double-input-form-button">
-                    <Button buttonText={buttonText} onClick={(e) => onSubmit(e)}></Button>
+                    <Button id="submitButton" buttonText={buttonText} onClick={(e) => onSubmit(e)}></Button>
                 </div>
             </form>
         </div>

@@ -49,7 +49,7 @@ export const LoginPage = () => {
                     onSubmit={onLogin}
                     placeholder2IsPass 
                 />
-                <p onClick={requestAccount} className='request-account-button'>No account? Get started here</p>
+                <p id="requestAcctButton" onClick={requestAccount} className='request-account-button'>No account? Get started here</p>
             </div>
         </div>
     );
