@@ -1,15 +1,14 @@
-import React from 'react';
+import React from "react";
 
 export const Button = ({ buttonText, onClick }) => {
-    
-    const onclick = (e) => {
-        e.preventDefault();
-        onClick();
-    }
+  const onclick = (e) => {
+    e.preventDefault();
+    onClick();
+  };
 
-    return(
-        <button onClick={onclick} className="dms-button">
-            {buttonText}
-        </button>
-    );
-}
+  return (
+    <button onClick={onclick} className="dms-button">
+      {buttonText}
+    </button>
+  );
+};
