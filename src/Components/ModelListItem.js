@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasksAlt } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export const ModelListItem = ({
   title,
@@ -9,6 +10,16 @@ export const ModelListItem = ({
   hyperparameters,
   showLoadingIndicator,
 }) => {
+  const navigate = useNavigate();
+
+  const openVisualization = () => {
+    navigate("/visualize");
+  };
+
+  const openAnalogyTest = () => {
+    navigate("/analogyTest");
+  };
+
   return (
     <div className="list-item flex-row-sb">
       <div className="list-item-text flex-row-sb">
@@ -40,8 +51,16 @@ export const ModelListItem = ({
             <p>Training...</p>
           </div>
         )}
-        <Button buttonText={"Validate"} disabled={showLoadingIndicator} />
-        <Button buttonText={"Visualize"} disabled={showLoadingIndicator} />
+        <Button
+          buttonText={"Validate"}
+          disabled={showLoadingIndicator}
+          onClick={openAnalogyTest}
+        />
+        <Button
+          buttonText={"Visualize"}
+          disabled={showLoadingIndicator}
+          onClick={openVisualization}
+        />
       </div>
     </div>
   );
