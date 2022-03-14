@@ -19,14 +19,14 @@ export const ModelListItem = ({
             className="model-list-item-icon"
           />
           <span class="tooltip-content">
-            <p>Embedding Size: {hyperparameters.embeddingSize}</p>
-            <p>Epochs to Train: {hyperparameters.epochsToTrain}</p>
-            <p>Learning Rate: {hyperparameters.learningRate}</p>
-            <p>Num Neg Sample: {hyperparameters.numNegSamples}</p>
-            <p>Batch Size: {hyperparameters.batchSize}</p>
-            <p>Concurrent Steps: {hyperparameters.concurrentSteps}</p>
-            <p>Window Size: {hyperparameters.windowSize}</p>
-            <p>Min Count: {hyperparameters.minCount}</p>
+            <p>Embedding Size: {hyperparameters.embedding_size}</p>
+            <p>Epochs to Train: {hyperparameters.epochs_to_train}</p>
+            <p>Learning Rate: {hyperparameters.learning_rate}</p>
+            <p>Num Neg Sample: {hyperparameters.num_neg_samples}</p>
+            <p>Batch Size: {hyperparameters.batch_size}</p>
+            <p>Concurrent Steps: {hyperparameters.concurrent_steps}</p>
+            <p>Window Size: {hyperparameters.window_size}</p>
+            <p>Min Count: {hyperparameters.min_count}</p>
             <p>Sub Sample: {hyperparameters.subsample}</p>
           </span>
         </div>

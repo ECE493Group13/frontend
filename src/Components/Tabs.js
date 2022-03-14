@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { FirstTab } from "../Components/Tabs/FirstTab";
-import { SecondTab } from "../Components/Tabs/SecondTab";
+import { DatasetTab } from "../Components/Tabs/DatasetTab";
+import { ModelsTab } from "../Components/Tabs/ModelsTab";
 
 export const Tabs = () => {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -30,7 +30,7 @@ export const Tabs = () => {
         </li>
       </ul>
       <div className="outlet">
-        {activeTab === "tab1" ? <FirstTab /> : <SecondTab />}
+        {activeTab === "tab1" ? <DatasetTab /> : <ModelsTab />}
       </div>
     </div>
   );
