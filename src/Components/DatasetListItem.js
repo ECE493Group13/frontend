@@ -1,7 +1,19 @@
 import React from "react";
 import { Button } from "./Button";
+import { useNavigate } from "react-router-dom";
 
-export const DatasetListItem = ({ title, date, showLoadingIndicator }) => {
+export const DatasetListItem = ({
+  datasetId,
+  title,
+  date,
+  showLoadingIndicator,
+}) => {
+  const navigate = useNavigate();
+
+  const openHyperparameterAdjustmentForm = () => {
+    navigate(`/trainSettings/${datasetId}`);
+  };
+
   return (
     <div className="list-item flex-row-sb">
       <div className="list-item-text flex-row-sb">
@@ -15,7 +27,11 @@ export const DatasetListItem = ({ title, date, showLoadingIndicator }) => {
             <p>Fetching Dataset...</p>
           </div>
         )}
-        <Button buttonText={"Train"} disabled={showLoadingIndicator} />
+        <Button
+          buttonText={"Train"}
+          disabled={showLoadingIndicator}
+          onClick={openHyperparameterAdjustmentForm}
+        />
       </div>
     </div>
   );

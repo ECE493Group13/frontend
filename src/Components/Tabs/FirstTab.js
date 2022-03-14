@@ -4,11 +4,13 @@ import { DatasetListItem } from "../DatasetListItem";
 export const FirstTab = () => {
   const fakeDatasetList = [
     {
+      id: 1,
       date: "02/22/2022",
       title: "Back Pain",
       taskCompleted: true,
     },
     {
+      id: 2,
       date: "02/10/2022",
       title: "Nausea",
       taskCompleted: false,
@@ -20,7 +22,8 @@ export const FirstTab = () => {
       {fakeDatasetList.map((dataset) => {
         return (
           <DatasetListItem
-            key={dataset.title}
+            key={dataset.id}
+            datasetId={dataset.id}
             title={dataset.title}
             date={dataset.date}
             showLoadingIndicator={!dataset.taskCompleted}
