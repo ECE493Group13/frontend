@@ -6,6 +6,7 @@ import { API_BASE_URL } from "../constants";
 export const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -25,14 +26,27 @@ export const LoginPage = () => {
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-      .then((response) => response.json())
-      .then((message) => {
-        // TODO: do something with the response
-        console.log(message);
-      });
+      .then((response) => {
+        if (!response.ok) {
+          if (response.status === 401) {
+            setErrorMessage("Incorrect username or password.");
+          } else {
+            setErrorMessage(
+              "There was an error processing this request. Please try again later."
+            );
+          }
+          throw new Error("HTTP status " + response.status);
+        }
 
-    // TODO: Hardcoded to go to change password page without verification or checking if first time
-    navigate("/changePassword");
+        return response.json();
+      })
+      .then((message) => {
+        if (message && message.is_temp_password) {
+          navigate("/changePassword");
+        } else {
+          navigate("/home");
+        }
+      });
   };
 
   const requestAccount = () => {
@@ -50,6 +64,7 @@ export const LoginPage = () => {
           buttonText="Log in"
           onSubmit={onLogin}
           placeholder2IsPass
+          errorMessage={errorMessage}
         />
         <p
           id="requestAcctButton"

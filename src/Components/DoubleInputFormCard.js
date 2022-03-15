@@ -12,6 +12,7 @@ export const DoubleInputFormCard = ({
   placeholder1IsPass,
   placeholder2IsPass,
   height,
+  errorMessage,
 }) => {
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
@@ -45,6 +46,7 @@ export const DoubleInputFormCard = ({
           className="dms-double-input-text-input"
           onInput={(e) => handleChangeInput2(e.target.value)}
         />
+        <p className="error-message">{errorMessage}</p>
         <div className="dms-double-input-form-button">
           <Button
             id="submitButton"

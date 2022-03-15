@@ -6,6 +6,8 @@ export const RequestAccountPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
 
+  const navigate = useNavigate();
+
   const onInputChange = (username, email) => {
     setUsername(username);
     setEmail(email);
@@ -27,6 +29,9 @@ export const RequestAccountPage = () => {
         // TODO: do something with the response
         console.log(message);
       });
+
+    // TODO: show toast
+    navigate("/login");
   };
 
   return (
