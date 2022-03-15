@@ -55,6 +55,7 @@ body {
   color: #63b9de;
   font-size: 22px;
   margin: 17px 15px;
+  cursor: pointer;
 }
 
 .dms-keyword-bar {
@@ -301,4 +302,8 @@ ul.dms-tab-navigator li.active {
 .hyperparameter-form-button {
   text-align: center;
   margin-top: 20px;
+}
+
+.logout-button {
+  margin: 20px 50%;
 }
