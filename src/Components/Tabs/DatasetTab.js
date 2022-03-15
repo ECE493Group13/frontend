@@ -1,7 +1,7 @@
 import React from "react";
 import { DatasetListItem } from "../DatasetListItem";
 
-export const FirstTab = () => {
+export const DatasetTab = () => {
   const fakeDatasetList = [
     {
       id: 1,
