@@ -4,6 +4,10 @@ import { HomePage } from "./Pages/HomePage";
 import { ChangePasswordPage } from "./Pages/ChangePasswordPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { RequestAccountPage } from "./Pages/RequestAccountPage";
+import { HyperparameterAdjustmentPage } from "./Pages/HyperparameterAdjustmentPage";
+import { ProfilePage } from "./Pages/ProfilePage";
+import { VisualizationPage } from "./Pages/VisualizationPage";
+import { AnalogyTestPage } from "./Pages/AnalogyTestPage";
 
 function App() {
   return (
@@ -22,6 +26,13 @@ function App() {
             path="/requestAccount"
             element={<RequestAccountPage />}
           />
+          <Route
+            path="/trainSettings/:id"
+            element={<HyperparameterAdjustmentPage />}
+          />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/visualize" element={<VisualizationPage />} />
+          <Route path="/analogyTest" element={<AnalogyTestPage />} />
         </Routes>
       </div>
     </Router>
