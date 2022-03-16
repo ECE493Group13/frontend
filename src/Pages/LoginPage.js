@@ -41,11 +41,14 @@ export const LoginPage = () => {
         return response.json();
       })
       .then((json) => {
-        const token = json && json.token ? json.token : "";
+        if (json && json.token) {
+          sessionStorage.setItem("token", `Bearer ${json.token}`);
+        }
+
         if (json && json.is_temp_password) {
-          navigate("/changePassword", { state: { token } });
+          navigate("/changePassword");
         } else {
-          navigate("/home", { state: { token } });
+          navigate("/home");
         }
       });
   };

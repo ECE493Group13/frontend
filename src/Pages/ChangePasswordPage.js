@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DoubleInputFormCard } from "../Components/DoubleInputFormCard";
 import { Header } from "../Components/Header";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 
 export const ChangePasswordPage = () => {
@@ -10,9 +10,8 @@ export const ChangePasswordPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
-  const route = useLocation();
 
-  const token = route.state.token;
+  const token = sessionStorage.getItem("token");
 
   const onInputChange = (oldPassword, newPassword) => {
     setOldPassword(oldPassword);
@@ -45,7 +44,7 @@ export const ChangePasswordPage = () => {
         new_password: newPassword,
       }),
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
         "Content-type": "application/json; charset=UTF-8",
       },
     })
@@ -59,8 +58,10 @@ export const ChangePasswordPage = () => {
         return response.json();
       })
       .then((json) => {
-        const token = json && json.token ? json.token : "";
-        navigate("/home", { state: { token } });
+        if (json && json.token) {
+          sessionStorage.setItem("token", `Bearer ${json.token}`);
+        }
+        navigate("/home");
       });
   };
 

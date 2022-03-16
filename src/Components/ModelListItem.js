@@ -29,7 +29,7 @@ export const ModelListItem = ({
             size="xl"
             className="model-list-item-icon"
           />
-          <span class="tooltip-content">
+          <span className="tooltip-content">
             <p>Embedding Size: {hyperparameters.embedding_size}</p>
             <p>Epochs to Train: {hyperparameters.epochs_to_train}</p>
             <p>Learning Rate: {hyperparameters.learning_rate}</p>
