@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-export const Header = ({ showProfileIcon }) => {
+export const Header = ({ showProfileIcon, token }) => {
   const navigate = useNavigate();
 
   const openProfilePage = () => {
-    navigate("/profile");
+    navigate("/profile", { state: { token } });
   };
 
   const routeHome = () => {

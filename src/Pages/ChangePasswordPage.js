@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { DoubleInputFormCard } from "../Components/DoubleInputFormCard";
 import { Header } from "../Components/Header";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { API_BASE_URL } from "../constants";
 
 export const ChangePasswordPage = () => {
