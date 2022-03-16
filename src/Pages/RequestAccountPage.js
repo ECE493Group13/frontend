@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { API_BASE_URL } from "../constants";
 import { DoubleInputFormCard } from "../Components/DoubleInputFormCard";
+import { useNavigate } from "react-router-dom";
 
 export const RequestAccountPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -23,15 +25,20 @@ export const RequestAccountPage = () => {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    })
-      .then((response) => response.json())
-      .then((message) => {
-        // TODO: do something with the response
-        console.log(message);
-      });
-
-    // TODO: show toast
-    navigate("/login");
+    }).then((response) => {
+      if (!response.ok) {
+        if (response.status === 409) {
+          setErrorMessage("Username or email already exists.");
+        } else {
+          setErrorMessage(
+            "There was an error processing your request. Please try again later"
+          );
+        }
+        throw new Error("HTTP status " + response.status);
+      }
+      // TODO: would be nice to show toast on success
+      navigate("/");
+    });
   };
 
   return (
@@ -40,12 +47,13 @@ export const RequestAccountPage = () => {
         <DoubleInputFormCard
           onInputChange={onInputChange}
           title="Request Account"
-          subtitle="You will be notified if your request is accepted or rejected"
+          subtitle="You will be notified by email if your request is accepted or rejected"
           placeholder1="Username"
           placeholder2="Email"
           buttonText="Request Account"
           onSubmit={onRequestAccount}
-          height={340}
+          height={errorMessage === "" ? 340 : 370}
+          errorMessage={errorMessage}
         />
       </div>
     </div>

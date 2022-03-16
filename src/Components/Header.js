@@ -11,7 +11,7 @@ export const Header = ({ showProfileIcon, token }) => {
   };
 
   const routeHome = () => {
-    navigate("/home");
+    navigate("/home", { state: { token } });
   };
 
   return (

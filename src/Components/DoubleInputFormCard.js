@@ -38,7 +38,10 @@ export const DoubleInputFormCard = ({
   };
 
   return (
-    <div className="dms-double-input-form-container" style={{ height: height }}>
+    <div
+      className="dms-double-input-form-container"
+      style={{ height: missingFieldMessage !== "" ? height + 30 : height }}
+    >
       <p className="dms-double-input-form-title">{title}</p>
       {subtitle && <p className="dms-double-input-form-subtitle">{subtitle}</p>}
       <form onSubmit={(e) => checkForMissingFields(e)}>
