@@ -40,11 +40,12 @@ export const LoginPage = () => {
 
         return response.json();
       })
-      .then((message) => {
-        if (message && message.is_temp_password) {
-          navigate("/changePassword");
+      .then((json) => {
+        const token = json && json.token ? json.token : "";
+        if (json && json.is_temp_password) {
+          navigate("/changePassword", { state: { token } });
         } else {
-          navigate("/home");
+          navigate("/home", { state: { token } });
         }
       });
   };

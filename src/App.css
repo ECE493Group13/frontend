@@ -19,6 +19,8 @@ body {
   color: #f03107;
   text-align: center;
   font-size: 14px;
+  max-width: 80%;
+  margin: 10px auto;
 }
 
 .dms-button {

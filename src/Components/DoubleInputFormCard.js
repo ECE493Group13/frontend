@@ -16,6 +16,7 @@ export const DoubleInputFormCard = ({
 }) => {
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
+  const [missingFieldMessage, setMissingFieldMessage] = useState("");
 
   const handleChangeInput1 = (input) => {
     setInput1(input);
@@ -27,17 +28,28 @@ export const DoubleInputFormCard = ({
     onInputChange(input1, input);
   };
 
+  const checkForMissingFields = (e) => {
+    if (input1 === "" || input2 === "") {
+      setMissingFieldMessage("Please complete all fields.");
+    } else {
+      setMissingFieldMessage("");
+      onSubmit(e);
+    }
+  };
+
   return (
     <div className="dms-double-input-form-container" style={{ height: height }}>
       <p className="dms-double-input-form-title">{title}</p>
       {subtitle && <p className="dms-double-input-form-subtitle">{subtitle}</p>}
-      <form onSubmit={onSubmit}>
+      <form onSubmit={(e) => checkForMissingFields(e)}>
         <input
           id="input1"
           type={placeholder1IsPass ? "password" : "text"}
           placeholder={placeholder1}
           className="dms-double-input-text-input"
           onInput={(e) => handleChangeInput1(e.target.value)}
+          required
+          autoComplete="true"
         />
         <input
           id="input2"
@@ -45,13 +57,18 @@ export const DoubleInputFormCard = ({
           placeholder={placeholder2}
           className="dms-double-input-text-input"
           onInput={(e) => handleChangeInput2(e.target.value)}
+          required
+          autoComplete="true"
         />
-        <p className="error-message">{errorMessage}</p>
+        <p className="error-message">
+          {/* Prioritize missing input error message over API fail message */}
+          {missingFieldMessage !== "" ? missingFieldMessage : errorMessage}
+        </p>
         <div className="dms-double-input-form-button">
           <Button
             id="submitButton"
             buttonText={buttonText}
-            onClick={(e) => onSubmit(e)}
+            onClick={(e) => checkForMissingFields(e)}
           ></Button>
         </div>
       </form>
