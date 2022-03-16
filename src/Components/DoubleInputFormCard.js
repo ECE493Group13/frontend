@@ -45,12 +45,8 @@ export const DoubleInputFormCard = ({
           className="dms-double-input-text-input"
           onInput={(e) => handleChangeInput2(e.target.value)}
         />
-        <div className="dms-double-input-form-button">
-          <Button
-            id="submitButton"
-            buttonText={buttonText}
-            onClick={(e) => onSubmit(e)}
-          ></Button>
+        <div id="submit-button" className="dms-double-input-form-button">
+          <Button buttonText={buttonText} onClick={(e) => onSubmit(e)}></Button>
         </div>
       </form>
     </div>
