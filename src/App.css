@@ -15,6 +15,14 @@ body {
   margin: 20px;
 }
 
+.error-message {
+  color: #f03107;
+  text-align: center;
+  font-size: 14px;
+  max-width: 80%;
+  margin: 10px auto;
+}
+
 .dms-button {
   background: #63b9de;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
