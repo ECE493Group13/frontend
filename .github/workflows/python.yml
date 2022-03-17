@@ -16,6 +16,7 @@ jobs:
           with:
             repository: ECE493Group13/api
             path: api
+            ref: main
         - name: Initialize Python 3.7
           uses: actions/setup-python@v1
           with:
