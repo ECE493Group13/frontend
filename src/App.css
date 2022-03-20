@@ -3,6 +3,10 @@ body {
   font-family: "Roboto";
 }
 
+.center-text {
+  text-align: center;
+}
+
 .dark-background {
   background-color: #293c4e;
   width: 100%;

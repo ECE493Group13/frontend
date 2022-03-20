@@ -11,7 +11,7 @@ export const HomePage = () => {
     if (sessionStorage.getItem("token") === null) {
       navigate("/");
     }
-  });
+  }, []);
 
   return (
     <div>

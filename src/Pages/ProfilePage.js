@@ -12,7 +12,7 @@ export const ProfilePage = () => {
     if (token === null) {
       navigate("/");
     }
-  });
+  }, []);
 
   const onRequestLogout = () => {
     fetch(`${API_BASE_URL}/auth/logout`, {

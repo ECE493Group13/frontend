@@ -7,23 +7,30 @@ export const KeywordBar = () => {
   const [input, setInput] = useState("");
 
   const onSubmitKeywords = (e) => {
-    e.preventDefault(); // Prevent full page load on form submit
     const keywords = input.split(/\s+/);
 
-    // TODO: Match the URL to the API in Flask app
-    fetch(`${API_BASE_URL}/data/filter`, {
+    const token = sessionStorage.getItem("token");
+    fetch(`${API_BASE_URL}/filter-task`, {
       method: "POST",
       body: JSON.stringify({
         keywords,
       }),
       headers: {
+        Authorization: token,
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-      .then((response) => response.json())
-      .then((message) => {
-        // TODO: do something with the response
-        console.log(message);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("HTTP status " + response.status);
+        }
+        return response.json();
+      })
+      .then((json) => {
+        if (json.is_error) {
+          // TODO: Would be nice to show a toast on error
+          console.log("ERROR");
+        }
       });
   };
 
