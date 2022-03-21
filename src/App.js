@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/home" element={<HomePage />} />
         <Route exact path="/requestAccount" element={<RequestAccountPage />} />
         <Route
-          path="/trainSettings/:id"
+          path="/trainSettings"
           element={<HyperparameterAdjustmentPage />}
         />
         <Route path="/profile" element={<ProfilePage />} />
