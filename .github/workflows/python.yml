@@ -25,12 +25,13 @@ jobs:
         - name: Create secrets file
           uses: 1arp/create-a-file-action@0.2
           with:
-            path: ''
+            path: 'db'
             file: 'secrets.mk'
             content: |
               PASSWORD=${{ secrets.DB_PW }}
               MAIL_PASSWORD=${{ secrets.MAIL_PW }}
         - name: Install dependencies
           run: |
-            make setup
+            python -m venv venv
+            source venv/bin/activate
             make serve
