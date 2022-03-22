@@ -32,7 +32,8 @@ jobs:
         - name: Install dependencies
           run: |
             pip install --upgrade pip
-            make setup
+            python -m venv venv
+            source venv/bin/activate
+            pip install -e .[dev]
             echo "VIRTUAL ENV:" $VIRTUAL_ENV
-            pip install Flask
             make serve
