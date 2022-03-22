@@ -33,4 +33,6 @@ jobs:
           run: |
             pip install --upgrade pip
             make setup
+            echo "VIRTUAL ENV:" $VIRTUAL_ENV
+            pip install Flask
             make serve
