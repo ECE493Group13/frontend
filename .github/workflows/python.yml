@@ -34,5 +34,6 @@ jobs:
             pip install --upgrade pip
             python -m venv venv
             source venv/bin/activate
-            pwd
+            pip install Flask
+            echo pwd
             make serve
