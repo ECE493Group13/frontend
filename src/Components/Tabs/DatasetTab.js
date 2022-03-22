@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DatasetListItem } from "../DatasetListItem";
 import { API_BASE_URL } from "../../constants";
+import { LoadingIndicator } from "../LoadingIndicator";
 
 export const DatasetTab = () => {
   const [datasets, setDatasets] = useState([]);
@@ -28,23 +29,16 @@ export const DatasetTab = () => {
         return response.json();
       })
       .then((json) => {
-        setDatasets(
-          json.filter((dataset) => {
-            return !dataset.is_error;
-          })
-        );
+        setDatasets(json.filter((dataset) => !dataset.is_error));
       });
   };
 
   const capitalizeFirstLetters = (title) => {
-    const splitTitle = title.toLowerCase().split(" ");
-
-    for (let i = 0; i < splitTitle.length; i++) {
-      splitTitle[i] =
-        splitTitle[i].charAt(0).toUpperCase() + splitTitle[i].substring(1);
-    }
-
-    return splitTitle.join(" ");
+    return title
+      .toLowerCase()
+      .split(" ")
+      .map((token) => token.charAt(0).toUpperCase() + token.substring(1))
+      .join(" ");
   };
 
   return (
@@ -61,12 +55,15 @@ export const DatasetTab = () => {
             />
           );
         })}
+      {/* Fetch is complete but there are no results */}
       {fetchComplete && datasets.length === 0 && (
         <p className="center-text">
           You have no datasets. Enter keywords into the input above to generate
           a new dataset.
         </p>
       )}
+      {/* Show loading indicator until fetch is complete */}
+      {!fetchComplete && <LoadingIndicator style={{ marginTop: "65px" }} />}
     </div>
   );
 };
