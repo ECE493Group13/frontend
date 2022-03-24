@@ -67,7 +67,8 @@ export const LoginPage = () => {
           placeholder2="Password"
           buttonText="Log in"
           onSubmit={onLogin}
-          placeholder2IsPass
+          input1Type="text"
+          input2Type="password"
           errorMessage={errorMessage}
         />
         <p

@@ -9,8 +9,8 @@ export const DoubleInputFormCard = ({
   placeholder2,
   buttonText,
   onSubmit,
-  placeholder1IsPass,
-  placeholder2IsPass,
+  input1Type,
+  input2Type,
   height,
   errorMessage,
 }) => {
@@ -47,7 +47,7 @@ export const DoubleInputFormCard = ({
       <form onSubmit={(e) => checkForMissingFields(e)}>
         <input
           id="input1"
-          type={placeholder1IsPass ? "password" : "text"}
+          type={input1Type}
           placeholder={placeholder1}
           className="dms-double-input-text-input"
           onInput={(e) => handleChangeInput1(e.target.value)}
@@ -56,7 +56,7 @@ export const DoubleInputFormCard = ({
         />
         <input
           id="input2"
-          type={placeholder2IsPass ? "password" : "text"}
+          type={input2Type}
           placeholder={placeholder2}
           className="dms-double-input-text-input"
           onInput={(e) => handleChangeInput2(e.target.value)}
