@@ -3,6 +3,10 @@ body {
   font-family: "Roboto";
 }
 
+.center-text {
+  text-align: center;
+}
+
 .dark-background {
   background-color: #293c4e;
   width: 100%;
@@ -13,6 +17,14 @@ body {
 .new-dataset-text {
   color: #293c4e;
   margin: 20px;
+}
+
+.error-message {
+  color: #f03107;
+  text-align: center;
+  font-size: 14px;
+  max-width: 80%;
+  margin: 10px auto;
 }
 
 .dms-button {

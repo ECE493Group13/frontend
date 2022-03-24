@@ -11,7 +11,7 @@ export const DatasetListItem = ({
   const navigate = useNavigate();
 
   const openHyperparameterAdjustmentForm = () => {
-    navigate(`/trainSettings/${datasetId}`);
+    navigate("/trainSettings", { state: { datasetId } });
   };
 
   return (

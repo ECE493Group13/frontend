@@ -7,15 +7,36 @@ import { API_BASE_URL } from "../constants";
 export const ChangePasswordPage = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
+
+  const token = sessionStorage.getItem("token");
 
   const onInputChange = (oldPassword, newPassword) => {
     setOldPassword(oldPassword);
     setNewPassword(newPassword);
   };
 
+  const isValidPassword = () => {
+    const passwordStrengthRegex = new RegExp(
+      "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"
+    );
+
+    const isValidPassword = passwordStrengthRegex.test(newPassword);
+
+    if (!isValidPassword) {
+      setErrorMessage(
+        "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one digit and one special character."
+      );
+    }
+
+    return isValidPassword;
+  };
+
   const onChangePassword = () => {
+    if (!isValidPassword()) return;
+
     fetch(`${API_BASE_URL}/auth/update-password`, {
       method: "POST",
       body: JSON.stringify({
@@ -23,17 +44,25 @@ export const ChangePasswordPage = () => {
         new_password: newPassword,
       }),
       headers: {
+        Authorization: token,
         "Content-type": "application/json; charset=UTF-8",
       },
     })
-      .then((response) => response.json())
-      .then((message) => {
-        // TODO: do something with the response
-        console.log(message);
+      .then((response) => {
+        if (!response.ok) {
+          setErrorMessage(
+            "There was an error processing this request. Please try again later."
+          );
+          throw new Error("HTTP status " + response.status);
+        }
+        return response.json();
+      })
+      .then((json) => {
+        if (json && json.token) {
+          sessionStorage.setItem("token", `Bearer ${json.token}`);
+        }
+        navigate("/home");
       });
-
-    // TODO: Hardcoded to go to home page without verification
-    navigate("/home");
   };
 
   return (
@@ -50,7 +79,8 @@ export const ChangePasswordPage = () => {
           onSubmit={onChangePassword}
           placeholder1IsPass
           placeholder2IsPass
-          height={340}
+          height={errorMessage === "" ? 340 : 370}
+          errorMessage={errorMessage}
         />
       </div>
     </div>
