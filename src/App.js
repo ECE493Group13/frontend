@@ -8,6 +8,7 @@ import { HyperparameterAdjustmentPage } from "./Pages/HyperparameterAdjustmentPa
 import { ProfilePage } from "./Pages/ProfilePage";
 import { VisualizationPage } from "./Pages/VisualizationPage";
 import { AnalogyTestPage } from "./Pages/AnalogyTestPage";
+import { AnalogyTestFormPage } from "./Pages/AnalogyTestFormPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/visualize" element={<VisualizationPage />} />
         <Route path="/analogyTest" element={<AnalogyTestPage />} />
+        <Route path="/analogyTestForm" element={<AnalogyTestFormPage />} />
       </Routes>
     </div>
   );
