@@ -9,39 +9,19 @@ describe("Change Password Page", () => {
       cy.get("#header").should("have.text", "Data Mining System");
     });
 
-  beforeEach(() => {
-    cy.visit(url);
-
-    cy.request({
-      url: "http://localhost:4433/auth/login",
-      method: "POST",
-      body: {
-        username: testUsername,
-        password: testTempPassword,
-      },
-    }).then((response) => {
-      expect(response.body.token).to.not.be.undefined;
-
-      const token = response.body.token;
-      sessionStorage.setItem("token", `Bearer ${token}`);
-
-      cy.visit(url + "/changePassword");
+    it('it should have "Data Mining System" in the header', () => {
+      cy.get("#header").should("have.text", "Data Mining System");
     });
-  });
 
-  it('it should have "Data Mining System" in the header', () => {
-    cy.get("#header").find("p").should("have.text", "Data Mining System");
-  });
+    it("it should not have profile icon in the header", () => {
+      cy.get("#profile-icon").should("not.exist");
+    });
 
-  it("it should not have profile icon in the header", () => {
-    cy.get("#profile-icon").should("not.exist");
-  });
-
-  it("it has a double input form container", () => {
-    cy.get("form")
-      .parent()
-      .should("have.class", "dms-double-input-form-container");
-  });
+    it("it has a double input form container", () => {
+      cy.get("form")
+        .parent()
+        .should("have.class", "dms-double-input-form-container");
+    });
 
     it("should show error message if old password doesn't match temporary password", () => {
       const oldPassword = "someinput";
