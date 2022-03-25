@@ -9,25 +9,25 @@ describe("Change Password Page", () => {
     cy.get("#header").should("have.text", "Data Mining System");
   });
 
-    it('it should have "Data Mining System" in the header', () => {
-      cy.get("#header").should("have.text", "Data Mining System");
-    });
+  it('it should have "Data Mining System" in the header', () => {
+    cy.get("#header").should("have.text", "Data Mining System");
+  });
 
-    it("it should not have profile icon in the header", () => {
-      cy.get("#profile-icon").should("not.exist");
-    });
+  it("it should not have profile icon in the header", () => {
+    cy.get("#profile-icon").should("not.exist");
+  });
 
-    it("it has a double input form container", () => {
-      cy.get("form")
-        .parent()
-        .should("have.class", "dms-double-input-form-container");
-    });
+  it("it has a double input form container", () => {
+    cy.get("form")
+      .parent()
+      .should("have.class", "dms-double-input-form-container");
+  });
 
   it("should show error message if old password doesn't match temporary password", () => {
     // Ignore uncaught exception resulting from failing to fetch some stuff from the home
     // Page which tries to load before we get rerouted to login page
-    Cypress.on('uncaught:exception', (err, runnable) => {
-      return false
+    Cypress.on("uncaught:exception", (err, runnable) => {
+      return false;
     });
 
     const oldPassword = "someinput";
