@@ -16,8 +16,8 @@ export const ModelListItem = ({
     navigate("/visualize");
   };
 
-  const openAnalogyTest = () => {
-    navigate("/analogyTest");
+  const openAnalogyTestForm = () => {
+    navigate("/analogyTestForm");
   };
 
   return (
@@ -54,7 +54,7 @@ export const ModelListItem = ({
         <Button
           buttonText={"Validate"}
           disabled={showLoadingIndicator}
-          onClick={openAnalogyTest}
+          onClick={openAnalogyTestForm}
         />
         <Button
           buttonText={"Visualize"}
