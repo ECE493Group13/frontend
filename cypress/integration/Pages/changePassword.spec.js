@@ -24,6 +24,12 @@ describe("Change Password Page", () => {
     });
 
   it("should show error message if old password doesn't match temporary password", () => {
+    // Ignore uncaught exception resulting from failing to fetch some stuff from the home
+    // Page which tries to load before we get rerouted to login page
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      return false
+    });
+
     const oldPassword = "someinput";
     const newPassword = "Str0ngPass!";
 
