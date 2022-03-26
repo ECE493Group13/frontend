@@ -49,15 +49,15 @@ export const HyperparameterAdjustmentPage = () => {
       document.getElementById("hyperparam-form").elements;
 
     const hyperparameters = {
-      embedding_size: parseInt(hyperparamInputs.item(0).value),
-      epochs_to_train: parseInt(hyperparamInputs.item(1).value),
-      learning_rate: parseInt(hyperparamInputs.item(2).value),
-      num_neg_samples: parseInt(hyperparamInputs.item(3).value),
-      batch_size: parseInt(hyperparamInputs.item(4).value),
-      concurrent_steps: parseInt(hyperparamInputs.item(5).value),
-      window_size: parseInt(hyperparamInputs.item(6).value),
-      min_count: parseInt(hyperparamInputs.item(7).value),
-      subsample: parseInt(hyperparamInputs.item(8).value),
+      embedding_size: parseFloat(hyperparamInputs.item(0).value),
+      epochs_to_train: parseFloat(hyperparamInputs.item(1).value),
+      learning_rate: parseFloat(hyperparamInputs.item(2).value),
+      num_neg_samples: parseFloat(hyperparamInputs.item(3).value),
+      batch_size: parseFloat(hyperparamInputs.item(4).value),
+      concurrent_steps: parseFloat(hyperparamInputs.item(5).value),
+      window_size: parseFloat(hyperparamInputs.item(6).value),
+      min_count: parseFloat(hyperparamInputs.item(7).value),
+      subsample: parseFloat(hyperparamInputs.item(8).value),
     };
 
     postTrainTask(hyperparameters);
