@@ -29,7 +29,20 @@ export const DatasetTab = () => {
         return response.json();
       })
       .then((json) => {
-        setDatasets(json.filter((dataset) => !dataset.is_error));
+        if (json.filter((dataset) => !dataset.is_complete).length > 0) {
+          // Should we check one dataset at a time?
+          setTimeout(fetchDatasets, 1000);
+        }
+        setDatasets(
+          json
+            .filter((dataset) => !dataset.is_error)
+            .sort(function (a, b) {
+              return (
+                new Date(a.created).getTime() - new Date(b.created).getTime()
+              );
+            })
+            .reverse()
+        );
       });
   };
 
