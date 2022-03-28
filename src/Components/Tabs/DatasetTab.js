@@ -48,7 +48,7 @@ export const DatasetTab = () => {
           return (
             <DatasetListItem
               key={dataset.id}
-              datasetId={dataset.id}
+              datasetId={dataset.dataset_id}
               title={capitalizeFirstLetters(dataset.keywords)}
               date={dataset.created.split("T")[0]}
               showLoadingIndicator={!dataset.is_complete}
