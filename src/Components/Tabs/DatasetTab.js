@@ -6,14 +6,37 @@ import { LoadingIndicator } from "../LoadingIndicator";
 export const DatasetTab = () => {
   const [datasets, setDatasets] = useState([]);
   const [fetchComplete, setFetchComplete] = useState(false);
+  const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     fetchDatasets();
   }, []);
 
-  const fetchDatasets = () => {
-    const token = sessionStorage.getItem("token");
+  const fetchDataset = (datasetId) => {
+    fetch(`${API_BASE_URL}/filter-task/${datasetId}`, {
+      method: "GET",
+      headers: {
+        Authorization: token,
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => {
+        setFetchComplete(true);
+        if (!response.ok) {
+          throw new Error("HTTP status " + response.status);
+        }
+        return response.json();
+      })
+      .then((json) => {
+        if (!json.is_complete) {
+          setTimeout(fetchDataset(datasetId), 1000);
+        } else {
+          fetchDatasets();
+        }
+      });
+  };
 
+  const fetchDatasets = () => {
     fetch(`${API_BASE_URL}/filter-task`, {
       method: "GET",
       headers: {
@@ -29,7 +52,22 @@ export const DatasetTab = () => {
         return response.json();
       })
       .then((json) => {
-        setDatasets(json.filter((dataset) => !dataset.is_error));
+        const incompleteDatasets = json.filter(
+          (dataset) => !dataset.is_complete
+        );
+        incompleteDatasets.forEach((dataset) => {
+          fetchDataset(dataset.id);
+        });
+        setDatasets(
+          json
+            .filter((dataset) => !dataset.is_error)
+            .sort(function (a, b) {
+              return (
+                new Date(a.created).getTime() - new Date(b.created).getTime()
+              );
+            })
+            .reverse() // Want to view newest first
+        );
       });
   };
 
