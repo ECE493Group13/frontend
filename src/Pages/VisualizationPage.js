@@ -3,13 +3,20 @@ import { Header } from "../Components/Header";
 import { API_BASE_URL } from "../constants";
 import { Scatter } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
+import { useNavigate } from "react-router-dom";
 ChartJS.register(...registerables);
 
 export const VisualizationPage = () => {
-  const [data, setData] = useState([]);
+  const [dataPoints, setDataPoints] = useState([]);
   const token = sessionStorage.getItem("token");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (sessionStorage.getItem("token") === null) {
+      navigate("/");
+    }
+
     fetchChartData();
   }, []);
 
@@ -30,30 +37,21 @@ export const VisualizationPage = () => {
       });
   };
 
-  const mapEachDataPointToObject = (rawData) => {
-    let data = [];
+  const mapEachDataPointToObject = (apiResponseData) => {
+    let dataPoints = [];
 
-    if (!rawData.labels || !rawData.x || !rawData.y) return;
+    if (!apiResponseData.labels || !apiResponseData.x || !apiResponseData.y)
+      return;
 
-    for (let i = 0; i < rawData.labels.length; i++) {
-      data.push({
-        x: rawData.x[i],
-        y: rawData.y[i],
-        label: rawData.labels[i],
+    for (let i = 0; i < apiResponseData.labels.length; i++) {
+      dataPoints.push({
+        x: apiResponseData.x[i],
+        y: apiResponseData.y[i],
+        label: apiResponseData.labels[i],
       });
     }
 
-    setData(data);
-  };
-
-  const chartData = {
-    datasets: [
-      {
-        label: "Scatter Dataset",
-        data: data,
-        backgroundColor: "#63b9de",
-      },
-    ],
+    setDataPoints(dataPoints);
   };
 
   return (
@@ -61,7 +59,15 @@ export const VisualizationPage = () => {
       <Header showProfileIcon />
       <div className="chart-container">
         <Scatter
-          data={chartData}
+          data={{
+            datasets: [
+              {
+                label: "Scatter Dataset",
+                data: dataPoints,
+                backgroundColor: "#63b9de",
+              },
+            ],
+          }}
           options={{
             plugins: {
               title: {
@@ -74,7 +80,7 @@ export const VisualizationPage = () => {
               tooltip: {
                 callbacks: {
                   label: function (tooltipItem) {
-                    var label = tooltipItem.raw.label;
+                    const label = tooltipItem.raw.label;
                     return label;
                   },
                 },
