@@ -33,11 +33,11 @@ export const VisualizationPage = () => {
         return response.json();
       })
       .then((json) => {
-        mapEachDataPointToObject(json);
+        mapApiResponseToDataPointsObj(json);
       });
   };
 
-  const mapEachDataPointToObject = (apiResponseData) => {
+  const mapApiResponseToDataPointsObj = (apiResponseData) => {
     let dataPoints = [];
 
     if (!apiResponseData.labels || !apiResponseData.x || !apiResponseData.y)
