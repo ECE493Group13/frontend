@@ -7,6 +7,7 @@ export const KeywordBar = () => {
   const [input, setInput] = useState("");
 
   const onSubmitKeywords = (e) => {
+    e.preventDefault();
     const keywords = input.split(/\s+/);
 
     const token = sessionStorage.getItem("token");
@@ -31,6 +32,7 @@ export const KeywordBar = () => {
           // TODO: Would be nice to show a toast on error
           console.log("ERROR");
         }
+        window.location.reload(false);
       });
   };
 

@@ -45,24 +45,26 @@ export const DoubleInputFormCard = ({
       <p className="dms-double-input-form-title">{title}</p>
       {subtitle && <p className="dms-double-input-form-subtitle">{subtitle}</p>}
       <form onSubmit={(e) => checkForMissingFields(e)}>
-        <input
-          id="input1"
-          type={placeholder1IsPass ? "password" : "text"}
-          placeholder={placeholder1}
-          className="dms-double-input-text-input"
-          onInput={(e) => handleChangeInput1(e.target.value)}
-          required
-          autoComplete="true"
-        />
-        <input
-          id="input2"
-          type={placeholder2IsPass ? "password" : "text"}
-          placeholder={placeholder2}
-          className="dms-double-input-text-input"
-          onInput={(e) => handleChangeInput2(e.target.value)}
-          required
-          autoComplete="true"
-        />
+        <div className="dms-double-input-input-container">
+          <input
+            id="input1"
+            type={placeholder1IsPass ? "password" : "text"}
+            placeholder={placeholder1}
+            className="dms-text-input"
+            onInput={(e) => handleChangeInput1(e.target.value)}
+            required
+            autoComplete="true"
+          />
+          <input
+            id="input2"
+            type={placeholder2IsPass ? "password" : "text"}
+            placeholder={placeholder2}
+            className="dms-text-input"
+            onInput={(e) => handleChangeInput2(e.target.value)}
+            required
+            autoComplete="true"
+          />
+        </div>
         <p className="error-message">
           {/* Prioritize missing input error message over API fail message */}
           {missingFieldMessage !== "" ? missingFieldMessage : errorMessage}

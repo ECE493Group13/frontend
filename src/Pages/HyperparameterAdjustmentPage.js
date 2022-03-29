@@ -6,6 +6,7 @@ import { API_BASE_URL } from "../constants";
 
 export const HyperparameterAdjustmentPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [hyperparamSuggestions, setHyperparamSuggestions] = useState({});
 
   const navigate = useNavigate();
   const route = useLocation();
@@ -18,7 +19,30 @@ export const HyperparameterAdjustmentPage = () => {
     if (!datasetId) {
       navigate("/");
     }
-  });
+
+    getHyperParameterSuggestions();
+  }, []);
+
+  const getHyperParameterSuggestions = () => {
+    const token = sessionStorage.getItem("token");
+
+    fetch(`${API_BASE_URL}/train-task/suggest-hparams`, {
+      method: "GET",
+      headers: {
+        Authorization: token,
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("HTTP status " + response.status);
+        }
+        return response.json();
+      })
+      .then((json) => {
+        setHyperparamSuggestions(json);
+      });
+  };
 
   const onSubmit = () => {
     const hyperparamInputs =
@@ -27,13 +51,13 @@ export const HyperparameterAdjustmentPage = () => {
     const hyperparameters = {
       embedding_size: parseInt(hyperparamInputs.item(0).value),
       epochs_to_train: parseInt(hyperparamInputs.item(1).value),
-      learning_rate: parseInt(hyperparamInputs.item(2).value),
+      learning_rate: parseFloat(hyperparamInputs.item(2).value),
       num_neg_samples: parseInt(hyperparamInputs.item(3).value),
       batch_size: parseInt(hyperparamInputs.item(4).value),
       concurrent_steps: parseInt(hyperparamInputs.item(5).value),
       window_size: parseInt(hyperparamInputs.item(6).value),
       min_count: parseInt(hyperparamInputs.item(7).value),
-      subsample: parseInt(hyperparamInputs.item(8).value),
+      subsample: parseFloat(hyperparamInputs.item(8).value),
     };
 
     postTrainTask(hyperparameters);
@@ -76,46 +100,55 @@ export const HyperparameterAdjustmentPage = () => {
       label: "Embedding Size:",
       name: "embedding_size",
       type: "number",
+      default_value: hyperparamSuggestions.embedding_size,
     },
     {
       label: "Epochs to Train:",
       name: "epochs_to_train",
       type: "number",
+      default_value: hyperparamSuggestions.epochs_to_train,
     },
     {
       label: "Learning Rate:",
       name: "learning_rate",
       type: "number",
+      default_value: hyperparamSuggestions.learning_rate,
     },
     {
       label: "Num Neg Samples:",
       name: "num_neg_samples",
       type: "number",
+      default_value: hyperparamSuggestions.num_neg_samples,
     },
     {
       label: "Batch Size:",
       name: "batch_size",
       type: "number",
+      default_value: hyperparamSuggestions.batch_size,
     },
     {
       label: "Concurrent Steps:",
       name: "concurrent_steps",
       type: "number",
+      default_value: hyperparamSuggestions.concurrent_steps,
     },
     {
       label: "Window Size:",
       name: "window_size",
       type: "number",
+      default_value: hyperparamSuggestions.window_size,
     },
     {
       label: "Min Count:",
       name: "min_count",
       type: "number",
+      default_value: hyperparamSuggestions.min_count,
     },
     {
       label: "Sub Sample:",
       name: "subsample",
       type: "number",
+      default_value: hyperparamSuggestions.subsample,
     },
   ];
 
@@ -143,6 +176,7 @@ export const HyperparameterAdjustmentPage = () => {
                 type={input.type}
                 name={input.name}
                 required
+                placeholder={input.default_value}
               ></input>
             </label>
           );
