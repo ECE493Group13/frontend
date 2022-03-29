@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ModelListItem } from "../ModelListItem";
+import { LoadingIndicator } from "../LoadingIndicator";
 import { API_BASE_URL } from "../../constants";
 
 export const ModelsTab = () => {
@@ -55,6 +56,8 @@ export const ModelsTab = () => {
           You have no models. Train your datasets to generate a new model.
         </p>
       )}
+      {/* Show loading indicator until fetch is complete */}
+      {!fetchComplete && <LoadingIndicator style={{ marginTop: "65px" }} />}
     </div>
   );
 };
