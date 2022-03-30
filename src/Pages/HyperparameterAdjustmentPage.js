@@ -6,19 +6,18 @@ import { API_BASE_URL } from "../constants";
 
 export const HyperparameterAdjustmentPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [datasetId, setDatasetId] = useState();
   const [hyperparamSuggestions, setHyperparamSuggestions] = useState({});
 
   const navigate = useNavigate();
   const route = useLocation();
   const token = sessionStorage.getItem("token");
 
-  let datasetId;
-
   useEffect(() => {
-    datasetId = route.state.datasetId;
-    if (!datasetId) {
+    if (!route.state.datasetId) {
       navigate("/");
     }
+    setDatasetId(route.state.datasetId);
 
     getHyperParameterSuggestions();
   }, []);
