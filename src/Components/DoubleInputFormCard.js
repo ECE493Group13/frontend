@@ -44,12 +44,15 @@ export const DoubleInputFormCard = ({
     >
       <p className="dms-double-input-form-title">{title}</p>
       {subtitle && <p className="dms-double-input-form-subtitle">{subtitle}</p>}
-      <form onSubmit={(e) => checkForMissingFields(e)}>
+      <form
+        className="dms-double-input-input-container"
+        onSubmit={(e) => checkForMissingFields(e)}
+      >
         <input
           id="input1"
           type={input1Type}
           placeholder={placeholder1}
-          className="dms-double-input-text-input"
+          className="dms-text-input"
           onInput={(e) => handleChangeInput1(e.target.value)}
           required
           autoComplete="true"
@@ -58,7 +61,7 @@ export const DoubleInputFormCard = ({
           id="input2"
           type={input2Type}
           placeholder={placeholder2}
-          className="dms-double-input-text-input"
+          className="dms-text-input"
           onInput={(e) => handleChangeInput2(e.target.value)}
           required
           autoComplete="true"
