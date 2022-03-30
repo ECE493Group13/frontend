@@ -88,6 +88,7 @@ export const DatasetTab = () => {
               key={dataset.id}
               datasetId={dataset.dataset_id}
               title={capitalizeFirstLetters(dataset.keywords)}
+              numPapers={dataset.dataset.num_papers}
               date={dataset.created.split("T")[0]}
               showLoadingIndicator={!dataset.is_complete}
             />

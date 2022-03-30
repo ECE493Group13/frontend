@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const DatasetListItem = ({
   datasetId,
   title,
+  numPapers,
   date,
   showLoadingIndicator,
 }) => {
@@ -19,6 +20,7 @@ export const DatasetListItem = ({
       <div className="list-item-text flex-row-sb">
         <p className="grey-text">{date}</p>
         <p>{title}</p>
+        <p className="num-papers-text">({numPapers} Papers)</p>
       </div>
       <div className="list-item-text flex-row-sb">
         {showLoadingIndicator && (
