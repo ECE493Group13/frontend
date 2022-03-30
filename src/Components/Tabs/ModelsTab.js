@@ -6,14 +6,20 @@ import { API_BASE_URL } from "../../constants";
 export const ModelsTab = () => {
   const [models, setModels] = useState([]);
   const [fetchComplete, setFetchComplete] = useState(false);
+  const token = sessionStorage.getItem("token");
+  let timeouts = [];
 
   useEffect(() => {
-    fetchDatasets();
+    fetchModels();
+
+    return () => {
+      timeouts.forEach((timeout) => {
+        clearInterval(timeout);
+      });
+    };
   }, []);
 
-  const fetchDatasets = () => {
-    const token = sessionStorage.getItem("token");
-
+  const fetchModels = () => {
     fetch(`${API_BASE_URL}/train-task`, {
       method: "GET",
       headers: {
@@ -29,11 +35,43 @@ export const ModelsTab = () => {
         return response.json();
       })
       .then((json) => {
-        setModels(
-          json.filter((model) => {
-            return !model.is_error;
-          })
+        const incompleteModelTasks = json.filter(
+          (modelTask) => !modelTask.is_complete
         );
+        incompleteModelTasks.forEach((modelTask) => {
+          timeouts[modelTask.id] = setInterval(fetchModel, 60000, modelTask.id);
+        });
+        setModels(
+          json
+            .filter((model) => !model.is_error)
+            .sort(function (a, b) {
+              return (
+                new Date(a.created).getTime() - new Date(b.created).getTime()
+              );
+            })
+            .reverse() // Want to view newest first
+        );
+      });
+  };
+
+  const fetchModel = (modelId) => {
+    fetch(`${API_BASE_URL}/train-task/${modelId}`, {
+      method: "GET",
+      headers: {
+        Authorization: token,
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("HTTP status " + response.status);
+        }
+        return response.json();
+      })
+      .then((json) => {
+        if (json.is_complete) {
+          clearInterval(timeouts[modelId]);
+        }
       });
   };
 
@@ -47,7 +85,10 @@ export const ModelsTab = () => {
               title={model.id}
               hyperparameters={JSON.parse(model.hparams)}
               date={model.created.split("T")[0]}
-              showLoadingIndicator={!model.is_complete}
+              showLoadingIndicator={
+                !model.is_complete && model.start_time !== null
+              }
+              disableButtons={!model.is_complete}
             />
           );
         })}
