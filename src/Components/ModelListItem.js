@@ -9,6 +9,7 @@ export const ModelListItem = ({
   date,
   hyperparameters,
   showLoadingIndicator,
+  disableButtons,
 }) => {
   const navigate = useNavigate();
 
@@ -53,12 +54,12 @@ export const ModelListItem = ({
         )}
         <Button
           buttonText={"Validate"}
-          disabled={showLoadingIndicator}
+          disabled={disableButtons}
           onClick={openAnalogyTestForm}
         />
         <Button
           buttonText={"Visualize"}
-          disabled={showLoadingIndicator}
+          disabled={disableButtons}
           onClick={openVisualization}
         />
       </div>
