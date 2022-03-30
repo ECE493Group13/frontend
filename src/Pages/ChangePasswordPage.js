@@ -49,13 +49,16 @@ export const ChangePasswordPage = () => {
       },
     })
       .then((response) => {
-        if (!response.ok) {
-          setErrorMessage(
-            "There was an error processing this request. Please try again later."
-          );
-          throw new Error("HTTP status " + response.status);
+        try {
+          if (!response.ok) {
+            setErrorMessage(
+              "There was an error processing this request. Please try again later."
+            );
+          }
+          return response.json();
+        } catch (e) {
+          console.log(e);
         }
-        return response.json();
       })
       .then((json) => {
         if (json && json.token) {
@@ -77,7 +80,8 @@ export const ChangePasswordPage = () => {
           placeholder2="New password"
           buttonText="Submit"
           onSubmit={onChangePassword}
-          placeholder1IsPass
+          input1Type="password"
+          input2Type="password"
           placeholder2IsPass
           height={errorMessage === "" ? 340 : 370}
           errorMessage={errorMessage}

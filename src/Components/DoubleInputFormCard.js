@@ -9,8 +9,8 @@ export const DoubleInputFormCard = ({
   placeholder2,
   buttonText,
   onSubmit,
-  placeholder1IsPass,
-  placeholder2IsPass,
+  input1Type,
+  input2Type,
   height,
   errorMessage,
 }) => {
@@ -45,31 +45,29 @@ export const DoubleInputFormCard = ({
       <p className="dms-double-input-form-title">{title}</p>
       {subtitle && <p className="dms-double-input-form-subtitle">{subtitle}</p>}
       <form onSubmit={(e) => checkForMissingFields(e)}>
-        <div className="dms-double-input-input-container">
-          <input
-            id="input1"
-            type={placeholder1IsPass ? "password" : "text"}
-            placeholder={placeholder1}
-            className="dms-text-input"
-            onInput={(e) => handleChangeInput1(e.target.value)}
-            required
-            autoComplete="true"
-          />
-          <input
-            id="input2"
-            type={placeholder2IsPass ? "password" : "text"}
-            placeholder={placeholder2}
-            className="dms-text-input"
-            onInput={(e) => handleChangeInput2(e.target.value)}
-            required
-            autoComplete="true"
-          />
-        </div>
+        <input
+          id="input1"
+          type={input1Type}
+          placeholder={placeholder1}
+          className="dms-double-input-text-input"
+          onInput={(e) => handleChangeInput1(e.target.value)}
+          required
+          autoComplete="true"
+        />
+        <input
+          id="input2"
+          type={input2Type}
+          placeholder={placeholder2}
+          className="dms-double-input-text-input"
+          onInput={(e) => handleChangeInput2(e.target.value)}
+          required
+          autoComplete="true"
+        />
         <p className="error-message">
           {/* Prioritize missing input error message over API fail message */}
           {missingFieldMessage !== "" ? missingFieldMessage : errorMessage}
         </p>
-        <div className="dms-double-input-form-button">
+        <div id="submit-button" className="dms-double-input-form-button">
           <Button
             id="submitButton"
             buttonText={buttonText}

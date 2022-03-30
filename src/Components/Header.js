@@ -16,11 +16,12 @@ export const Header = ({ showProfileIcon }) => {
 
   return (
     <div className="dms-header flex-row-sb">
-      <p className="dms-header-title" onClick={routeHome}>
+      <p id="header" className="dms-header-title" onClick={routeHome}>
         Data Mining System
       </p>
       {showProfileIcon && (
         <FontAwesomeIcon
+          id="profile-icon"
           icon={faUserCircle}
           size="2x"
           className="dms-icon"

@@ -15,7 +15,20 @@ export const RequestAccountPage = () => {
     setEmail(email);
   };
 
+  const isEmailValid = () => {
+    const validEmailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const isValid = email.match(validEmailPattern);
+
+    isValid
+      ? setErrorMessage("")
+      : setErrorMessage("Please enter a valid email");
+
+    return isValid;
+  };
+
   const onRequestAccount = () => {
+    if (!isEmailValid()) return;
+
     fetch(`${API_BASE_URL}/register`, {
       method: "POST",
       body: JSON.stringify({
@@ -50,6 +63,8 @@ export const RequestAccountPage = () => {
           subtitle="You will be notified by email if your request is accepted or rejected"
           placeholder1="Username"
           placeholder2="Email"
+          input1Type="text"
+          input2Type="email"
           buttonText="Request Account"
           onSubmit={onRequestAccount}
           height={errorMessage === "" ? 340 : 370}
