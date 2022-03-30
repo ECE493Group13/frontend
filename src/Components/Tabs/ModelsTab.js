@@ -71,6 +71,7 @@ export const ModelsTab = () => {
       .then((json) => {
         if (json.is_complete) {
           clearInterval(timeouts[modelId]);
+          fetchModels();
         }
       });
   };
