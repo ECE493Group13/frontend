@@ -348,3 +348,8 @@ ul.dms-tab-navigator li.active {
   height: 80%;
   margin: 35px auto;
 }
+
+.num-papers-text {
+  font-size: 12px;
+  margin-top: 2.5px;
+}
