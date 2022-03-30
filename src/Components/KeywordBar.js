@@ -8,7 +8,7 @@ export const KeywordBar = () => {
 
   const onSubmitKeywords = (e) => {
     e.preventDefault();
-    const keywords = input.split(/\s+/);
+    const keywords = input.toLowerCase().split(/\s+/);
 
     const token = sessionStorage.getItem("token");
     fetch(`${API_BASE_URL}/filter-task`, {
