@@ -60,7 +60,7 @@ describe("Home Page", () => {
       }, (req) => {
         // Delay response so we catch loading indicator
         req.on('response', (res) => {
-          res.setThrottle(1000)
+          res.setThrottle(1000);
         })
       },
       {
@@ -156,7 +156,7 @@ describe("Home Page", () => {
       }, (req) => {
         // Delay response so we catch loading indicator
         req.on('response', (res) => {
-          res.setThrottle(1000)
+          res.setThrottle(2000);
         })
       },
       {
