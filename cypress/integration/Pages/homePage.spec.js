@@ -2,6 +2,7 @@ describe("Home Page", () => {
   const url = "http://localhost:3000";
 
   beforeEach(() => {
+    cy.setToken();
     cy.intercept(
       {
         method: 'GET',
