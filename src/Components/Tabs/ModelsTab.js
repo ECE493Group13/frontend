@@ -83,6 +83,7 @@ export const ModelsTab = () => {
           return (
             <ModelListItem
               key={model.id}
+              trainedModelId={model.model_id}
               title={model.id}
               hyperparameters={JSON.parse(model.hparams)}
               date={model.created.split("T")[0]}

@@ -3,6 +3,21 @@ body {
   font-family: "Roboto";
 }
 
+table, th, td {
+  background-color: white;
+  border: 2px solid #e0e0e0;
+  border-collapse: collapse;
+  padding: 5px;
+  font-weight: normal;
+  box-shadow: 0px 4px 4px rgb(0 0 0 / 10%);
+
+}
+
+th {
+  padding: 10px;
+  font-weight: bold;
+}
+
 .center-text {
   text-align: center;
 }
@@ -352,4 +367,46 @@ ul.dms-tab-navigator li.active {
 .num-papers-text {
   font-size: 12px;
   margin-top: 2.5px;
+}
+
+.closest-words-table {
+  margin: 30px auto;
+  width: 35%;
+  padding: 10px;
+}
+
+.closest-analogies-table {
+  margin: 30px auto;
+  width: 35%;
+  padding: 10px;
+}
+
+.closest-words-table tr:hover td {
+  cursor: pointer;
+  background: #f3f3f3;
+}
+
+.analogy-test-word-highlight {
+  color: #293c4e;
+  border-left: 1px solid;
+  border-top: 1px solid;
+  border-right: 3px solid;
+  border-bottom: 4px solid;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-1deg);
+}
+
+.analogy-test-paragraph {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 25px;
+}
+
+#closest-word-input {
+  width: 460px;
+}
+
+#num-closest-word-input {
+  width: 100px;
 }

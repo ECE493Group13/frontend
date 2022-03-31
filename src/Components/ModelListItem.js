@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 export const ModelListItem = ({
   title,
   date,
+  trainedModelId,
   hyperparameters,
   showLoadingIndicator,
   disableButtons,
@@ -17,8 +18,8 @@ export const ModelListItem = ({
     navigate("/visualize");
   };
 
-  const openAnalogyTestForm = () => {
-    navigate("/analogyTestForm");
+  const openClosestWordForm = () => {
+    navigate("/closestWords", { state: { trainedModelId } });
   };
 
   return (
@@ -55,7 +56,7 @@ export const ModelListItem = ({
         <Button
           buttonText={"Validate"}
           disabled={disableButtons}
-          onClick={openAnalogyTestForm}
+          onClick={openClosestWordForm}
         />
         <Button
           buttonText={"Visualize"}
