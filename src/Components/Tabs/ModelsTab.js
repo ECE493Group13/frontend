@@ -35,6 +35,7 @@ export const ModelsTab = () => {
         return response.json();
       })
       .then((json) => {
+        if (!json) return;
         const incompleteModelTasks = json.filter(
           (modelTask) => !modelTask.is_complete
         );

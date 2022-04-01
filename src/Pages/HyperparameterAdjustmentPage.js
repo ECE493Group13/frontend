@@ -14,7 +14,7 @@ export const HyperparameterAdjustmentPage = () => {
   const token = sessionStorage.getItem("token");
 
   useEffect(() => {
-    if (!route.state.datasetId) {
+    if (!route.state?.datasetId) {
       navigate("/");
     }
     setDatasetId(route.state.datasetId);
@@ -39,6 +39,7 @@ export const HyperparameterAdjustmentPage = () => {
         return response.json();
       })
       .then((json) => {
+        if (!json) return;
         setHyperparamSuggestions(json);
       });
   };
