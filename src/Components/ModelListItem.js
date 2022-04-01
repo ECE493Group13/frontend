@@ -8,6 +8,7 @@ export const ModelListItem = ({
   title,
   date,
   trainedModelId,
+  trainTaskId,
   hyperparameters,
   showLoadingIndicator,
   disableButtons,
@@ -15,7 +16,7 @@ export const ModelListItem = ({
   const navigate = useNavigate();
 
   const openVisualization = () => {
-    navigate("/visualize");
+    navigate("/visualize", { state: { trainTaskId } });
   };
 
   const openClosestWordForm = () => {

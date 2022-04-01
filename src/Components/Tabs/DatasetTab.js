@@ -52,6 +52,7 @@ export const DatasetTab = () => {
         return response.json();
       })
       .then((json) => {
+        if (!json) return;
         const incompleteDatasets = json.filter(
           (dataset) => !dataset.is_complete
         );

@@ -35,6 +35,7 @@ export const ModelsTab = () => {
         return response.json();
       })
       .then((json) => {
+        if (!json) return;
         const incompleteModelTasks = json.filter(
           (modelTask) => !modelTask.is_complete
         );
@@ -84,6 +85,7 @@ export const ModelsTab = () => {
             <ModelListItem
               key={model.id}
               trainedModelId={model.model_id}
+              trainTaskId={model.id}
               title={model.id}
               hyperparameters={JSON.parse(model.hparams)}
               date={model.created.split("T")[0]}

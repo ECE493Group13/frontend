@@ -118,6 +118,7 @@ th {
 
 .keyword-submit-button:hover {
   background-color: #2481a8;
+  cursor: pointer;
 }
 
 .flex-row-sb {
