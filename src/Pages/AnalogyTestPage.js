@@ -26,7 +26,7 @@ export const AnalogyTestPage = () => {
     const token = sessionStorage.getItem("token");
 
     fetch(
-      `${API_BASE_URL}/verify/analogy-test?word_a=${wordA}&word_b=${wordB}&word_c=${wordC}&trained_model_id=${trainedModelId}&  count=${count}`,
+      `${API_BASE_URL}/verify/analogy-test?word_a=${wordA}&word_b=${wordB}&word_c=${wordC}&trained_model_id=${trainedModelId}&count=${count}`,
       {
         method: "GET",
         headers: {
