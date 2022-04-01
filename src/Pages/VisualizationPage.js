@@ -3,7 +3,7 @@ import { Header } from "../Components/Header";
 import { API_BASE_URL } from "../constants";
 import { Scatter } from "react-chartjs-2";
 import { Chart as ChartJS, registerables } from "chart.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 ChartJS.register(...registerables);
 
 export const VisualizationPage = () => {
@@ -11,18 +11,20 @@ export const VisualizationPage = () => {
   const token = sessionStorage.getItem("token");
 
   const navigate = useNavigate();
+  const route = useLocation();
 
   useEffect(() => {
     if (sessionStorage.getItem("token") === null) {
       navigate("/");
     }
-
-    fetchChartData();
+    if (route.state.trainTaskId === undefined) {
+      navigate("/");
+    }
+    fetchChartData(route.state.trainTaskId);
   }, []);
 
-  const fetchChartData = () => {
-    fetch(`${API_BASE_URL}/visualize`, {
-      // TODO: Update with payload if needed
+  const fetchChartData = (trainTaskId) => {
+    fetch(`${API_BASE_URL}/visualize?train_task_id=${trainTaskId}`, {
       method: "GET",
       headers: {
         Authorization: token,
@@ -33,7 +35,7 @@ export const VisualizationPage = () => {
         return response.json();
       })
       .then((json) => {
-        mapApiResponseToDataPointsObj(json);
+        mapApiResponseToDataPointsObj(JSON.parse(json));
       });
   };
 
@@ -50,7 +52,6 @@ export const VisualizationPage = () => {
         label: apiResponseData.labels[i],
       });
     }
-
     setDataPoints(dataPoints);
   };
 
