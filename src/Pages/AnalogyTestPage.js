@@ -3,7 +3,7 @@ import { Header } from "../Components/Header";
 import { Button } from "../Components/Button";
 import { LoadingIndicator } from "../Components/LoadingIndicator";
 import { API_BASE_URL } from "../constants";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const AnalogyTestPage = () => {
   const [wordA, setWordA] = useState("");
@@ -17,6 +17,7 @@ export const AnalogyTestPage = () => {
   const [fetchComplete, setFetchComplete] = useState(false);
 
   const route = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setWordA(route.state?.word_a);
@@ -41,14 +42,18 @@ export const AnalogyTestPage = () => {
     )
       .then((response) => {
         setFetchComplete(true);
-        if (!response.ok) {
-          // TODO: Error handling
-          throw new Error("HTTP status " + response.status);
+        if (response.status === 401) {
+          alert("Your session has expired, Please sign in again.");
+          navigate("/");
+          return;
         }
         return response.json();
       })
       .then((json) => {
         setAnalogyTestResults(json);
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 

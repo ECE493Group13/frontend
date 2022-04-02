@@ -35,7 +35,7 @@ export const LoginPage = () => {
               "There was an error processing this request. Please try again later."
             );
           }
-          throw new Error("HTTP status " + response.status);
+          return;
         }
 
         return response.json();
@@ -50,6 +50,9 @@ export const LoginPage = () => {
         } else {
           navigate("/home");
         }
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 

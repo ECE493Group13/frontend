@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { API_BASE_URL } from "../constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export const KeywordBar = () => {
   const [input, setInput] = useState("");
+
+  const navigate = useNavigate();
 
   const onSubmitKeywords = (e) => {
     if (input === "") return;
@@ -24,17 +27,24 @@ export const KeywordBar = () => {
       },
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("HTTP status " + response.status);
+        if (response.status === 401) {
+          alert("Your session has expired, Please sign in again.");
+          navigate("/");
+          return;
         }
         return response.json();
       })
       .then((json) => {
         if (json.is_error) {
-          // TODO: Would be nice to show a toast on error
-          console.log("ERROR");
+          console.log(
+            "There was an error fetching the dataset with the keywords: ",
+            keywords
+          );
         }
         window.location.reload(false);
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 

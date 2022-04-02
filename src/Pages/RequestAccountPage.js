@@ -49,7 +49,6 @@ export const RequestAccountPage = () => {
         }
         throw new Error("HTTP status " + response.status);
       }
-      // TODO: would be nice to show toast on success
       navigate("/");
     });
   };

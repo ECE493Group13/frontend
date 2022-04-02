@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "../Components/Button";
 import { Header } from "../Components/Header";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +8,6 @@ export const ProfilePage = () => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
 
-  useEffect(() => {
-    if (token === null) {
-      navigate("/");
-    }
-  }, []);
-
   const onRequestLogout = () => {
     fetch(`${API_BASE_URL}/auth/logout`, {
       method: "POST",
@@ -21,13 +15,14 @@ export const ProfilePage = () => {
         Authorization: token,
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error("HTTP status " + response.status);
-      }
-      sessionStorage.clear();
-      navigate("/");
-    });
+    })
+      .then(() => {
+        sessionStorage.clear();
+        navigate("/");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
