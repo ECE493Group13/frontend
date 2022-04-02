@@ -64,11 +64,13 @@ export const ModelListItem = ({
           </div>
         )}
         <Button
+          id={disableButtons ? "validateButtonDisabled" : "validateButton"}
           buttonText={"Validate"}
           disabled={disableButtons}
           onClick={openClosestWordForm}
         />
         <Button
+          id={disableButtons ? "visualizeButtonDisabled" : "visualizeButton"}
           buttonText={"Visualize"}
           disabled={disableButtons}
           onClick={openVisualization}
