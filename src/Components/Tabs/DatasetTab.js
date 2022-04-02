@@ -8,11 +8,18 @@ export const DatasetTab = () => {
   const [datasets, setDatasets] = useState([]);
   const [fetchComplete, setFetchComplete] = useState(false);
   const token = sessionStorage.getItem("token");
+  let timeouts = [];
 
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchDatasets();
+
+    return () => {
+      timeouts.forEach((timeout) => {
+        clearInterval(timeout);
+      });
+    };
   }, []);
 
   const fetchDataset = (datasetId) => {
@@ -33,9 +40,8 @@ export const DatasetTab = () => {
         return response.json();
       })
       .then((json) => {
-        if (!json.is_complete) {
-          setTimeout(fetchDataset(datasetId), 1000);
-        } else {
+        if (json.is_complete) {
+          clearInterval(timeouts[datasetId]);
           fetchDatasets();
         }
       })
@@ -67,7 +73,7 @@ export const DatasetTab = () => {
           (dataset) => !dataset.is_complete
         );
         incompleteDatasets.forEach((dataset) => {
-          fetchDataset(dataset.id);
+          timeouts[dataset.id] = setInterval(fetchDataset, 10000, dataset.id);
         });
         setDatasets(
           json

@@ -10,6 +10,8 @@ export const KeywordBar = () => {
   const navigate = useNavigate();
 
   const onSubmitKeywords = (e) => {
+    if (input === "") return;
+
     e.preventDefault();
     const keywords = input.toLowerCase().split(/\s+/);
 
