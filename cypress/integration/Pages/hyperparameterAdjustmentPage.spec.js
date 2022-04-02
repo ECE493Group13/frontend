@@ -16,8 +16,6 @@ describe("Hyperparameter Adjustment Page", () => {
     cy.visit(url + "/home");
     cy.wait(["@sampleDatasets"]);
 
-    cy.contains("Train").first().click();
-
     cy.intercept(
       {
         method: "GET",
@@ -27,7 +25,7 @@ describe("Hyperparameter Adjustment Page", () => {
         fixture: "hyperparamSuggestions",
       }
     ).as("hyperparamSuggestions");
-    cy.visit(url + "/trainSettings");
+    cy.get(".dms-button").contains("Train").first().click();
     cy.wait(["@hyperparamSuggestions"]);
   });
 

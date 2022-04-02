@@ -1,4 +1,4 @@
-describe("Hyperparameter Adjustment Page", () => {
+describe("Analogy Test Page", () => {
   const url = "http://localhost:3000";
 
   beforeEach(() => {

@@ -37,15 +37,32 @@ describe("Change Password Page", () => {
     cy.get("#input2").type(newPassword);
 
     cy.get("#submit-button").find("button").click();
-    cy.intercept("POST", "http://localhost:4433/auth/update-password", {
+
+    cy.intercept("POST", "/auth/update-password", {
       statusCode: 401,
       body: {
         oldPassword: oldPassword,
         newPassword: newPassword,
       },
     }).as("backendAPI");
+    cy.wait(["@backendAPI"]);
+
     cy.contains(
       "There was an error processing this request. Please try again later."
     );
+
+    cy.intercept(
+      {
+        method: "GET",
+        path: "/filter-task",
+      },
+      {
+        fixture: "sampleDatasets",
+      }
+    ).as("sampleDatasets");
+
+
+
+    cy.wait(["@sampleDatasets"]);
   });
 });
