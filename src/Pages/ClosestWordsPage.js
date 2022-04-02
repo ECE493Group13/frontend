@@ -70,6 +70,9 @@ export const ClosestWordsPage = () => {
     if (word === "") {
       setErrorMessage("Please enter a word");
       return false;
+    } else if (numWords < 0 || !/^\d+$/.test(numWords)) {
+      setErrorMessage("Please enter a positive number");
+      return false;
     } else {
       setErrorMessage("");
       return true;

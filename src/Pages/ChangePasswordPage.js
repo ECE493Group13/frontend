@@ -49,15 +49,11 @@ export const ChangePasswordPage = () => {
       },
     })
       .then((response) => {
-        try {
-          if (!response.ok) {
-            setErrorMessage(
-              "There was an error processing this request. Please try again later."
-            );
-          }
-          return response.json();
-        } catch (e) {
-          console.log(e);
+        if (!response.ok) {
+          setErrorMessage(
+            "There was an error processing this request. Please try again later."
+          );
+          throw new Error("HTTP status " + response.status);
         }
       })
       .then((json) => {
@@ -65,6 +61,9 @@ export const ChangePasswordPage = () => {
           sessionStorage.setItem("token", `Bearer ${json.token}`);
         }
         navigate("/home");
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 

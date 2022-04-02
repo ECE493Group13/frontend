@@ -3,6 +3,7 @@
     "created": "2022-03-30T17:06:17.797795",
     "dataset": {
       "id": 43,
+      "name": "stress fracture", 
       "num_papers": 385
     },
     "dataset_id": 43,
@@ -18,6 +19,7 @@
     "created": "2022-03-30T16:53:41.335004",
     "dataset": {
       "id": 42,
+      "name": "back pain", 
       "num_papers": 0
     },
     "dataset_id": 42,
@@ -33,6 +35,7 @@
     "created": "2022-03-30T16:53:41.335004",
     "dataset": {
       "id": 27, 
+      "name": "sample error", 
       "num_papers": 0
     },
     "dataset_id": 28,
