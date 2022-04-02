@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "../Components/Header";
 import { Button } from "../Components/Button";
+import { LoadingIndicator } from "../Components/LoadingIndicator";
 import { API_BASE_URL } from "../constants";
 import { useLocation } from "react-router-dom";
 
@@ -12,6 +13,8 @@ export const AnalogyTestPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [count, setCount] = useState(500);
   const [analogyTestResults, setAnalogyTestResults] = useState([]);
+  const [fetchStarted, setFetchStarted] = useState(false);
+  const [fetchComplete, setFetchComplete] = useState(false);
 
   const route = useLocation();
 
@@ -25,6 +28,7 @@ export const AnalogyTestPage = () => {
     if (!isFormValid()) return;
     const token = sessionStorage.getItem("token");
 
+    setFetchStarted(true);
     fetch(
       `${API_BASE_URL}/verify/analogy-test?word_a=${wordA}&word_b=${wordB}&word_c=${wordC}&trained_model_id=${trainedModelId}&count=${count}`,
       {
@@ -36,6 +40,7 @@ export const AnalogyTestPage = () => {
       }
     )
       .then((response) => {
+        setFetchComplete(true);
         if (!response.ok) {
           // TODO: Error handling
           throw new Error("HTTP status " + response.status);
@@ -104,13 +109,15 @@ export const AnalogyTestPage = () => {
           </form>
         </div>
       )}
+      {analogyTestResults.length > 0 && (
+        <p className="analogy-test-paragraph">
+          <span className="analogy-test-word-highlight">{wordC}</span> is to...
+        </p>
+      )}
+      {fetchStarted && !fetchComplete && (
+        <LoadingIndicator style={{ marginTop: "65px" }} />
+      )}
       <div>
-        {analogyTestResults.length > 0 && (
-          <p className="analogy-test-paragraph">
-            <span className="analogy-test-word-highlight">{wordC}</span> is
-            to...
-          </p>
-        )}
         <table className="closest-analogies-table">
           <tbody>
             {analogyTestResults.length > 0 && (
