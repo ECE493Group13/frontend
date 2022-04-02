@@ -61,8 +61,6 @@ describe("Change Password Page", () => {
       }
     ).as("sampleDatasets");
 
-
-
     cy.wait(["@sampleDatasets"]);
   });
 });
