@@ -51,6 +51,9 @@ export const AnalogyTestPage = () => {
     if (wordC === "") {
       setErrorMessage("Please enter a word");
       return false;
+    } else if (count < 0 || !/^\d+$/.test(count)) {
+      setErrorMessage("Please enter a positive number");
+      return false;
     } else {
       setErrorMessage("");
       return true;
