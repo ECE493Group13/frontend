@@ -36,8 +36,6 @@ describe("Change Password Page", () => {
     cy.get("#input1").type(oldPassword);
     cy.get("#input2").type(newPassword);
 
-    cy.get("#submit-button").find("button").click();
-
     cy.intercept("POST", "/auth/update-password", {
       statusCode: 401,
       body: {
@@ -45,6 +43,9 @@ describe("Change Password Page", () => {
         newPassword: newPassword,
       },
     }).as("backendAPI");
+
+    cy.get("#submit-button").find("button").click();
+    
     cy.wait(["@backendAPI"]);
 
     cy.contains(
