@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export const ModelListItem = ({
   title,
+  numPapers,
   date,
   trainedModelId,
   trainTaskId,
@@ -21,6 +22,13 @@ export const ModelListItem = ({
 
   const openClosestWordForm = () => {
     navigate("/closestWords", { state: { trainedModelId } });
+  };
+
+  const getNumPapersSubtitle = () => {
+    if (numPapers === undefined) return;
+    if (numPapers === 0)
+      return <p className="num-papers-text error-message">Empty dataset</p>;
+    return <p className="num-papers-text">({numPapers} Papers)</p>;
   };
 
   return (
@@ -46,6 +54,7 @@ export const ModelListItem = ({
         </div>
         <p className="grey-text">{date}</p>
         <p>{title}</p>
+        {getNumPapersSubtitle()}
       </div>
       <div className="list-item-text flex-row-sb">
         {showLoadingIndicator && (
