@@ -175,8 +175,6 @@ describe("Analogy Test Page", () => {
 
     cy.wait(["@analogyTest"]);
 
-    cy.get(
-      ":nth-child(5) > .analogy-test-word-highlight"
-    ).contains("word2");
+    cy.get(":nth-child(5) > .analogy-test-word-highlight").contains("word2");
   });
 });
