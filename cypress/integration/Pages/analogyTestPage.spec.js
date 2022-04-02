@@ -29,7 +29,7 @@ describe("Analogy Test Page", () => {
     cy.wait(["@sampleModels"]);
 
     cy.get(".dms-button").contains("Validate").click();
-    
+
     cy.intercept(
       {
         method: "GET",
@@ -39,10 +39,10 @@ describe("Analogy Test Page", () => {
         fixture: "closestWords",
       }
     ).as("closestWords");
-    
+
     cy.get("#closest-word-input").type("word");
     cy.get(".dms-button").contains("Submit").click();
-    
+
     cy.wait(["@closestWords"]);
 
     cy.get("tbody > :nth-child(2) > :nth-child(1)").click();
@@ -61,14 +61,16 @@ describe("Analogy Test Page", () => {
   });
 
   it('should have "Enter a third word below to perform an analogy test on the given words.', () => {
-    cy.contains("Enter a third word below to perform an analogy test on the given words.");
+    cy.contains(
+      "Enter a third word below to perform an analogy test on the given words."
+    );
   });
 
-  it('should contain the text entered on the previous page', () => {
+  it("should contain the text entered on the previous page", () => {
     cy.get(".analogy-test-paragraph > :nth-child(1)").contains("word");
   });
 
-  it('should contain the text clicked on the previous page', () => {
+  it("should contain the text clicked on the previous page", () => {
     cy.get(".analogy-test-paragraph > :nth-child(2)").contains("facial");
   });
 
@@ -76,7 +78,7 @@ describe("Analogy Test Page", () => {
     cy.get("[type='text']").should("have.attr", "placeholder", "Word is to...");
   });
 
-  it('should have a number input with default value 500', () => {
+  it("should have a number input with default value 500", () => {
     cy.get("[type='number']").should("have.attr", "value", "500");
   });
 
@@ -87,15 +89,18 @@ describe("Analogy Test Page", () => {
 
   it("accepts number input", () => {
     const input = 5;
-    cy.get("#num-closest-word-input").clear().type(input).should("have.value", input);
+    cy.get("#num-closest-word-input")
+      .clear()
+      .type(input)
+      .should("have.value", input);
   });
 
-  it('should show error message if submit is clicked without entering word', () => {
+  it("should show error message if submit is clicked without entering word", () => {
     cy.get(".dms-button").contains("Submit").click();
     cy.contains("Please enter a word");
   });
 
-  it('should show error message if non-number is entered in number field', () => {
+  it("should show error message if non-number is entered in number field", () => {
     const input = "e";
     cy.get("#closest-word-input").type(input);
 
@@ -104,16 +109,19 @@ describe("Analogy Test Page", () => {
     cy.contains("Please enter a positive number");
   });
 
-  it('should show error message if negative number is entered in number field', () => {
+  it("should show error message if negative number is entered in number field", () => {
     const input = -5;
     cy.get("#closest-word-input").type(input);
 
-    cy.get("#num-closest-word-input").clear().type(input).should("have.value", input);
+    cy.get("#num-closest-word-input")
+      .clear()
+      .type(input)
+      .should("have.value", input);
     cy.get(".dms-button").contains("Submit").click();
     cy.contains("Please enter a positive number");
   });
 
-  it('should not show table if no results', () => {
+  it("should not show table if no results", () => {
     cy.intercept(
       {
         method: "GET",
@@ -132,7 +140,7 @@ describe("Analogy Test Page", () => {
     cy.get("thbody").should("not.exist");
   });
 
-  it('should show table on successful API call', () => {
+  it("should show table on successful API call", () => {
     cy.intercept(
       {
         method: "GET",
@@ -142,16 +150,16 @@ describe("Analogy Test Page", () => {
         fixture: "analogyTest",
       }
     ).as("analogyTest");
-    
+
     cy.get("#closest-word-input").type("word");
     cy.get(".dms-button").contains("Submit").click();
-    
+
     cy.wait(["@analogyTest"]);
 
     cy.get("tbody").should("exist");
   });
 
-  it('should show newly entered word on successful API call', () => {
+  it("should show newly entered word on successful API call", () => {
     cy.intercept(
       {
         method: "GET",
@@ -161,12 +169,14 @@ describe("Analogy Test Page", () => {
         fixture: "analogyTest",
       }
     ).as("analogyTest");
-    
+
     cy.get("#closest-word-input").type("word2");
     cy.get(".dms-button").contains("Submit").click();
-    
+
     cy.wait(["@analogyTest"]);
 
-    cy.get(":nth-child(5) > .analogy-test-paragraph > .analogy-test-word-highlight").contains("word2");
+    cy.get(
+      ":nth-child(5) > .analogy-test-paragraph > .analogy-test-word-highlight"
+    ).contains("word2");
   });
 });

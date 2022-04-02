@@ -52,7 +52,7 @@ describe("Closest Words Page", () => {
     cy.get("[type='text']").should("have.attr", "placeholder", "Word");
   });
 
-  it('should have a number input with default value 100', () => {
+  it("should have a number input with default value 100", () => {
     cy.get("[type='number']").should("have.attr", "value", "100");
   });
 
@@ -63,15 +63,18 @@ describe("Closest Words Page", () => {
 
   it("accepts number input", () => {
     const input = 5;
-    cy.get("#num-closest-word-input").clear().type(input).should("have.value", input);
+    cy.get("#num-closest-word-input")
+      .clear()
+      .type(input)
+      .should("have.value", input);
   });
 
-  it('should show error message if submit is clicked without entering word', () => {
+  it("should show error message if submit is clicked without entering word", () => {
     cy.get(".dms-button").contains("Submit").click();
     cy.contains("Please enter a word");
   });
 
-  it('should show error message if non-number is entered in number field', () => {
+  it("should show error message if non-number is entered in number field", () => {
     const input = "e";
     cy.get("#closest-word-input").type(input);
 
@@ -80,16 +83,19 @@ describe("Closest Words Page", () => {
     cy.contains("Please enter a positive number");
   });
 
-  it('should show error message if negative number is entered in number field', () => {
+  it("should show error message if negative number is entered in number field", () => {
     const input = -5;
     cy.get("#closest-word-input").type(input);
 
-    cy.get("#num-closest-word-input").clear().type(input).should("have.value", input);
+    cy.get("#num-closest-word-input")
+      .clear()
+      .type(input)
+      .should("have.value", input);
     cy.get(".dms-button").contains("Submit").click();
     cy.contains("Please enter a positive number");
   });
 
-  it('should not show table if no results', () => {
+  it("should not show table if no results", () => {
     cy.intercept(
       {
         method: "GET",
@@ -108,7 +114,7 @@ describe("Closest Words Page", () => {
     cy.get("thbody").should("not.exist");
   });
 
-  it('should show table on successful API call', () => {
+  it("should show table on successful API call", () => {
     cy.intercept(
       {
         method: "GET",
@@ -118,10 +124,10 @@ describe("Closest Words Page", () => {
         fixture: "closestWords",
       }
     ).as("closestWords");
-    
+
     cy.get("#closest-word-input").type("word");
     cy.get(".dms-button").contains("Submit").click();
-    
+
     cy.wait(["@closestWords"]);
 
     cy.get("tbody").should("exist");
