@@ -43,6 +43,11 @@ describe("Login Page", () => {
       .should("equal", "pointer");
   });
 
+  it('should navigate to request account form if No account?... is clicked', () => {
+    cy.contains("No account? Get started here").click();
+    cy.url().should('include', '/requestAccount');
+  });
+
   it('should show error message if username or password is incorrect', () => {
     const username = "test_username";
     const password = "test_password";
