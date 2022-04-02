@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { DatasetListItem } from "../DatasetListItem";
 import { API_BASE_URL } from "../../constants";
+import { useNavigate } from "react-router-dom";
 import { LoadingIndicator } from "../LoadingIndicator";
 
 export const DatasetTab = () => {
   const [datasets, setDatasets] = useState([]);
   const [fetchComplete, setFetchComplete] = useState(false);
   const token = sessionStorage.getItem("token");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchDatasets();
@@ -22,8 +25,10 @@ export const DatasetTab = () => {
     })
       .then((response) => {
         setFetchComplete(true);
-        if (!response.ok) {
-          throw new Error("HTTP status " + response.status);
+        if (response.status === 401) {
+          alert("Your session has expired, Please sign in again.");
+          navigate("/");
+          return;
         }
         return response.json();
       })
@@ -33,6 +38,9 @@ export const DatasetTab = () => {
         } else {
           fetchDatasets();
         }
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 
@@ -46,8 +54,10 @@ export const DatasetTab = () => {
     })
       .then((response) => {
         setFetchComplete(true);
-        if (!response.ok) {
-          throw new Error("HTTP status " + response.status);
+        if (response.status === 401) {
+          alert("Your session has expired, Please sign in again.");
+          navigate("/");
+          return;
         }
         return response.json();
       })
@@ -69,6 +79,9 @@ export const DatasetTab = () => {
             })
             .reverse() // Want to view newest first
         );
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 

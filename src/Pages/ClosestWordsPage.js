@@ -15,7 +15,7 @@ export const ClosestWordsPage = () => {
   const route = useLocation();
 
   useEffect(() => {
-    if (!route.state.trainedModelId) {
+    if (!route.state?.trainedModelId) {
       navigate("/");
     }
     setTrainedModelId(route.state.trainedModelId);
@@ -36,14 +36,18 @@ export const ClosestWordsPage = () => {
       }
     )
       .then((response) => {
-        if (!response.ok) {
-          // TODO: Error handling
-          throw new Error("HTTP status " + response.status);
+        if (response.status === 401) {
+          alert("Your session has expired, Please sign in again.");
+          navigate("/");
+          return;
         }
         return response.json();
       })
       .then((json) => {
         setClosestWords(json);
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 

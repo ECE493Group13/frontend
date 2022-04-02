@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Header } from "../Components/Header";
 import { Button } from "../Components/Button";
 import { API_BASE_URL } from "../constants";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const AnalogyTestPage = () => {
   const [wordA, setWordA] = useState("");
@@ -14,6 +14,7 @@ export const AnalogyTestPage = () => {
   const [analogyTestResults, setAnalogyTestResults] = useState([]);
 
   const route = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setWordA(route.state?.word_a);
@@ -36,14 +37,18 @@ export const AnalogyTestPage = () => {
       }
     )
       .then((response) => {
-        if (!response.ok) {
-          // TODO: Error handling
-          throw new Error("HTTP status " + response.status);
+        if (response.status === 401) {
+          alert("Your session has expired, Please sign in again.");
+          navigate("/");
+          return;
         }
         return response.json();
       })
       .then((json) => {
         setAnalogyTestResults(json);
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 
