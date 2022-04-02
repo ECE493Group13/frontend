@@ -86,7 +86,8 @@ export const ModelsTab = () => {
               key={model.id}
               trainedModelId={model.model_id}
               trainTaskId={model.id}
-              title={model.id}
+              title={model.dataset.name}
+              numPapers={model.dataset.num_papers}
               hyperparameters={JSON.parse(model.hparams)}
               date={model.created.split("T")[0]}
               showLoadingIndicator={

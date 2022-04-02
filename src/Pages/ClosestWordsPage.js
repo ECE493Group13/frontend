@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "../Components/Header";
 import { Button } from "../Components/Button";
+import { LoadingIndicator } from "../Components/LoadingIndicator";
 import { API_BASE_URL } from "../constants";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export const ClosestWordsPage = () => {
   const [word, setWord] = useState("");
+  const [fetchStarted, setFetchStarted] = useState(false);
+  const [fetchComplete, setFetchComplete] = useState(false);
   const [closestWords, setClosestWords] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [trainedModelId, setTrainedModelId] = useState();
@@ -25,6 +28,7 @@ export const ClosestWordsPage = () => {
     if (!isFormValid()) return;
     const token = sessionStorage.getItem("token");
 
+    setFetchStarted(true);
     fetch(
       `${API_BASE_URL}/verify/most-similar?word=${word}&count=${numWords}&trained_model_id=${trainedModelId}`,
       {
@@ -36,6 +40,7 @@ export const ClosestWordsPage = () => {
       }
     )
       .then((response) => {
+        setFetchComplete(true);
         if (!response.ok) {
           // TODO: Error handling
           throw new Error("HTTP status " + response.status);
@@ -48,7 +53,6 @@ export const ClosestWordsPage = () => {
   };
 
   const startAnalogyTest = (wordB) => {
-    console.log(wordB);
     navigate("/analogyTest", {
       state: {
         word_a: word,
@@ -113,6 +117,9 @@ export const ClosestWordsPage = () => {
         </form>
       </div>
       <div>
+        {fetchStarted && !fetchComplete && (
+          <LoadingIndicator style={{ marginTop: "65px" }} />
+        )}
         <table className="closest-words-table">
           <tbody>
             {closestWords.length > 0 && (
