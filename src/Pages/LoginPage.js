@@ -41,6 +41,7 @@ export const LoginPage = () => {
         return response.json();
       })
       .then((json) => {
+        if (!json) return;
         if (json && json.token) {
           sessionStorage.setItem("token", `Bearer ${json.token}`);
         }
