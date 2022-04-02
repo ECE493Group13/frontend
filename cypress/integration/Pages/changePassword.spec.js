@@ -50,19 +50,5 @@ describe("Change Password Page", () => {
     cy.contains(
       "There was an error processing this request. Please try again later."
     );
-
-    cy.intercept(
-      {
-        method: "GET",
-        path: "/filter-task",
-      },
-      {
-        fixture: "sampleDatasets",
-      }
-    ).as("sampleDatasets");
-
-
-
-    cy.wait(["@sampleDatasets"]);
   });
 });
