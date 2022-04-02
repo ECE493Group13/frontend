@@ -1,4 +1,4 @@
-import { test1Username, test1Password } from "../secrets.js";
+import { completeAccountUsername, completeAccountPassword } from "../secrets.js";
 
 describe("Login", () => {
     const url = "http://localhost:3000";
@@ -7,8 +7,8 @@ describe("Login", () => {
       cy.visit(url);
 
       // Login
-      cy.get("#input1").type(test1Username);
-      cy.get("#input2").type(test1Password);
+      cy.get("#input1").type(completeAccountUsername);
+      cy.get("#input2").type(completeAccountPassword);
       cy.get(".dms-button").contains("Log in").click();
     });
   
