@@ -33,14 +33,19 @@ export const HyperparameterAdjustmentPage = () => {
       },
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("HTTP status " + response.status);
+        if (response.status === 401) {
+          alert("Your session has expired, Please sign in again.");
+          navigate("/");
+          return;
         }
         return response.json();
       })
       .then((json) => {
         if (!json) return;
         setHyperparamSuggestions(json);
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 
@@ -79,6 +84,12 @@ export const HyperparameterAdjustmentPage = () => {
         if (!response.ok) {
           if (response.status === 422) {
             setErrorMessage("Please complete all fields.");
+          } else if (response.statues === 401) {
+            if (response.status === 401) {
+              alert("Your session has expired, Please sign in again.");
+              navigate("/");
+              return;
+            }
           } else {
             setErrorMessage(
               "There was an error processing this request. Please try again later"
@@ -92,6 +103,9 @@ export const HyperparameterAdjustmentPage = () => {
       .then((json) => {
         console.log(json);
         navigate(`/home`);
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 

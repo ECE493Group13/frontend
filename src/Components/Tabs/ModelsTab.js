@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { ModelListItem } from "../ModelListItem";
 import { LoadingIndicator } from "../LoadingIndicator";
 import { API_BASE_URL } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 export const ModelsTab = () => {
   const [models, setModels] = useState([]);
   const [fetchComplete, setFetchComplete] = useState(false);
   const token = sessionStorage.getItem("token");
   let timeouts = [];
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchModels();
@@ -29,8 +32,10 @@ export const ModelsTab = () => {
     })
       .then((response) => {
         setFetchComplete(true);
-        if (!response.ok) {
-          throw new Error("HTTP status " + response.status);
+        if (response.status === 401) {
+          alert("Your session has expired, Please signin again.");
+          navigate("/");
+          return;
         }
         return response.json();
       })
@@ -52,6 +57,9 @@ export const ModelsTab = () => {
             })
             .reverse() // Want to view newest first
         );
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 
@@ -64,8 +72,10 @@ export const ModelsTab = () => {
       },
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("HTTP status " + response.status);
+        if (response.status === 401) {
+          alert("Your session has expired, Please signin again.");
+          navigate("/");
+          return;
         }
         return response.json();
       })
@@ -74,6 +84,9 @@ export const ModelsTab = () => {
           clearInterval(timeouts[modelId]);
           fetchModels();
         }
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 

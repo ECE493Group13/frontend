@@ -32,10 +32,18 @@ export const VisualizationPage = () => {
       },
     })
       .then((response) => {
+        if (response.status === 401) {
+          alert("Your session has expired, Please sign in again.");
+          navigate("/");
+          return;
+        }
         return response.json();
       })
       .then((json) => {
         mapApiResponseToDataPointsObj(JSON.parse(json));
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 
