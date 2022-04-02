@@ -38,19 +38,23 @@ export const RequestAccountPage = () => {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((response) => {
-      if (!response.ok) {
-        if (response.status === 409) {
-          setErrorMessage("Username or email already exists.");
-        } else {
-          setErrorMessage(
-            "There was an error processing your request. Please try again later"
-          );
+    })
+      .then((response) => {
+        if (!response.ok) {
+          if (response.status === 409) {
+            setErrorMessage("Username or email already exists.");
+          } else {
+            setErrorMessage(
+              "There was an error processing your request. Please try again later"
+            );
+          }
+          throw new Error("HTTP status " + response.status);
         }
-        throw new Error("HTTP status " + response.status);
-      }
-      navigate("/");
-    });
+        navigate("/");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (

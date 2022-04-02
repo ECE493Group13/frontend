@@ -1,6 +1,6 @@
 import { completeAccountUsername, completeAccountPassword } from "../secrets.js";
 
-describe("Login", () => {
+describe("Logout", () => {
     const url = "http://localhost:3000";
   
     beforeEach(() => {
