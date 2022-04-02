@@ -29,7 +29,7 @@ export const ProfilePage = () => {
     <div>
       <Header showProfileIcon />
       <div className="logout-button">
-        <Button buttonText={"Logout"} onClick={onRequestLogout} />
+        <Button buttonText={"Log out"} onClick={onRequestLogout} />
       </div>
     </div>
   );

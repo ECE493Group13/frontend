@@ -343,7 +343,8 @@ ul.dms-tab-navigator li.active {
 }
 
 .logout-button {
-  margin: 20px 50%;
+  margin: 20px 0;
+  text-align: center;
 }
 
 .analogy-test-form-container {
