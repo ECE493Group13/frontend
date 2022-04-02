@@ -7,6 +7,8 @@ export const KeywordBar = () => {
   const [input, setInput] = useState("");
 
   const onSubmitKeywords = (e) => {
+    if (input === "") return;
+
     e.preventDefault();
     const keywords = input.toLowerCase().split(/\s+/);
 
