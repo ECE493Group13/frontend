@@ -45,7 +45,7 @@ describe("Change Password Page", () => {
     }).as("backendAPI");
 
     cy.get("#submit-button").find("button").click();
-    
+
     cy.wait(["@backendAPI"]);
 
     cy.contains(
