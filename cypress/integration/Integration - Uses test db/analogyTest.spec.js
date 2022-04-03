@@ -1,4 +1,7 @@
-import { completeAccountUsername, completeAccountPassword } from "../secrets.js";
+import {
+  completeAccountUsername,
+  completeAccountPassword,
+} from "../secrets.js";
 
 describe("Analogy Test", () => {
   const url = "http://localhost:3000";
@@ -16,14 +19,14 @@ describe("Analogy Test", () => {
     cy.get("#validateButton").click();
   });
 
-  it('should perform an end to end analogy test', () => {
-    cy.url().should('include', '/closestWords');
+  it("should perform an end to end analogy test", () => {
+    cy.url().should("include", "/closestWords");
 
     cy.get("#closest-word-input").type("pain{enter}");
 
     cy.get("tbody > :nth-child(2) > :nth-child(1)").click();
-    
-    cy.url().should('include', '/analogyTest');
+
+    cy.url().should("include", "/analogyTest");
 
     cy.get(".analogy-test-paragraph > :nth-child(2)").contains("human");
 

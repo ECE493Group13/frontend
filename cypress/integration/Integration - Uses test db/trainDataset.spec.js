@@ -1,4 +1,7 @@
-import { completeAccountUsername, completeAccountPassword } from "../secrets.js";
+import {
+  completeAccountUsername,
+  completeAccountPassword,
+} from "../secrets.js";
 
 describe("Train Dataset", () => {
   const url = "http://localhost:3000";
@@ -13,9 +16,9 @@ describe("Train Dataset", () => {
     cy.wait(2000);
   });
 
-  it('should train model with correct id', () => {
+  it("should train model with correct id", () => {
     cy.get(".dms-button").contains("Train").first().click();
-    
+
     cy.get("[for='embedding_size'] > .dms-number-input").type(200);
     cy.get("[for='epochs_to_train'] > .dms-number-input").type(15);
     cy.get("[for='learning_rate'] > .dms-number-input").type(0.025);
@@ -28,14 +31,14 @@ describe("Train Dataset", () => {
 
     cy.get(".dms-button").contains("Train Model").click();
 
-    cy.intercept('/train-task').as("trainTaskRequest");
+    cy.intercept("/train-task").as("trainTaskRequest");
 
     cy.wait("@trainTaskRequest").then((req) => {
       expect(req.response.body.dataset_id).to.equal(56);
     });
   });
 
-  it ('should show newly trained model in models list', () => {
+  it("should show newly trained model in models list", () => {
     cy.get(".dms-tab-navigator > :nth-child(2)").click();
     cy.contains("flu");
   });

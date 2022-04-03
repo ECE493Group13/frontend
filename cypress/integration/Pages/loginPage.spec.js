@@ -43,12 +43,12 @@ describe("Login Page", () => {
       .should("equal", "pointer");
   });
 
-  it('should navigate to request account form if No account?... is clicked', () => {
+  it("should navigate to request account form if No account?... is clicked", () => {
     cy.contains("No account? Get started here").click();
-    cy.url().should('include', '/requestAccount');
+    cy.url().should("include", "/requestAccount");
   });
 
-  it('should show error message if username or password is incorrect', () => {
+  it("should show error message if username or password is incorrect", () => {
     const username = "test_username";
     const password = "test_password";
 
@@ -68,7 +68,7 @@ describe("Login Page", () => {
     cy.contains("Incorrect username or password.");
   });
 
-  it('should route to change password page on incomplete login', () => {
+  it("should route to change password page on incomplete login", () => {
     const username = "test_username";
     const password = "test_password";
 
@@ -87,10 +87,10 @@ describe("Login Page", () => {
 
     cy.get(".dms-button").contains("Log in").click();
 
-    cy.url().should('include', '/changePassword');
+    cy.url().should("include", "/changePassword");
   });
 
-  it('should route to home page on complete login', () => {
+  it("should route to home page on complete login", () => {
     const username = "test_username";
     const password = "test_password";
 
@@ -109,7 +109,6 @@ describe("Login Page", () => {
 
     cy.get(".dms-button").contains("Log in").click();
 
-    cy.url().should('include', '/home');
+    cy.url().should("include", "/home");
   });
-
 });
