@@ -69,7 +69,7 @@ describe("Change Password Page", () => {
     });
   });
 
-  describe.only("White box tests", () => {
+  describe("White box tests", () => {
     it("should show error message if email/password already exists", () => {
       cy.intercept("POST", "/register", {
         statusCode: 409,
