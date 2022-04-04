@@ -20,6 +20,17 @@ export const AnalogyTestPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (
+      !route ||
+      !route.state ||
+      !route.state.word_a ||
+      !route.state.word_b ||
+      !route.state.trained_model_id
+    ) {
+      navigate("/");
+      return;
+    }
+
     setWordA(route.state?.word_a);
     setWordB(route.state?.word_b);
     setTrainedModelId(route.state?.trained_model_id);

@@ -1,6 +1,81 @@
 describe("Home Page", () => {
   const url = "http://localhost:3000";
 
+  describe("Keyword Bar", () => {
+    beforeEach(() => {
+      cy.setToken();
+      cy.intercept(
+        {
+          method: "GET",
+          path: "/filter-task",
+        },
+        {
+          fixture: "sampleDatasets",
+        }
+      ).as("sampleDatasets");
+      cy.visit(url + "/home");
+      cy.wait(["@sampleDatasets"]);
+    });
+
+    it ('should not send a request to filter-task if keywords are empty', () => {
+      cy.intercept(
+        {
+          method: "GET",
+          path: "/filter-task",
+        }
+      ).as("interceptFilter");
+
+      cy.get(".keyword-submit-button").click();
+
+      cy.wait(["@interceptFilter"]);
+
+      // Expect API call to fail to be intercepted
+      cy.on("fail", (err) => {
+        expect(err.message).to.include(
+          "`cy.wait()` timed out waiting `100ms` for the 1st request to the route: `interceptFilter`. No request ever occurred."
+        );
+        done();
+      });
+    });
+
+    it ('should send keywords to request in lowercase', () => {
+      cy.intercept(
+        {
+          method: "POST",
+          path: "/filter-task",
+        },
+        {
+          fixture: "sampleFilterTask",
+        }
+      ).as("interceptFilter");
+
+      cy.get(".dms-keyword-bar").type("KEYWORD");
+      cy.get(".keyword-submit-button").click();
+
+      cy.wait("@interceptFilter").then((req) => {
+        expect(req.request.body.keywords[0]).to.equal('keyword');
+      });
+    });
+
+    it ('should send keywords when enter is typed versus clicking the button', () => {
+      cy.intercept(
+        {
+          method: "POST",
+          path: "/filter-task",
+        },
+        {
+          fixture: "sampleFilterTask",
+        }
+      ).as("interceptFilter");
+
+      cy.get(".dms-keyword-bar").type("test{enter}");
+
+      cy.wait("@interceptFilter").then((req) => {
+        expect(req.request.body.keywords[0]).to.equal('test');
+      });
+    });
+  });
+
   describe("Dataset Tab", () => {
     beforeEach(() => {
       cy.setToken();
