@@ -1,10 +1,10 @@
 describe("Hyperparameter Adjustment Page", () => {
   const url = "http://localhost:3000";
-  
+
   describe("Black box tests", () => {
     beforeEach(() => {
       cy.setToken();
-  
+
       cy.intercept(
         {
           method: "GET",
@@ -16,7 +16,7 @@ describe("Hyperparameter Adjustment Page", () => {
       ).as("sampleDatasets");
       cy.visit(url + "/home");
       cy.wait(["@sampleDatasets"]);
-  
+
       cy.intercept(
         {
           method: "GET",
@@ -33,9 +33,11 @@ describe("Hyperparameter Adjustment Page", () => {
     it('should have "Data Mining System" in the header', () => {
       cy.get("#header").should("have.text", "Data Mining System");
     });
-  
+
     it("should have a clickable profile icon in the header", () => {
-      cy.get("#profile-icon").invoke("css", "cursor").should("equal", "pointer");
+      cy.get("#profile-icon")
+        .invoke("css", "cursor")
+        .should("equal", "pointer");
     });
 
     it("should have all correct hyperparameter inputs", () => {
@@ -49,7 +51,7 @@ describe("Hyperparameter Adjustment Page", () => {
       cy.get('[for="min_count"]').contains("Min Count");
       cy.get('[for="subsample"]').contains("Sub Sample");
     });
-  
+
     it("should have train model button", () => {
       cy.get(".dms-button").contains("Train Model");
     });
@@ -120,11 +122,11 @@ describe("Hyperparameter Adjustment Page", () => {
       cy.intercept("GET", "/train-task/suggest-hparams", {
         statusCode: 401,
       }).as("hyperparamUnauthorized");
-      
+
       cy.get(".dms-button").contains("Train").first().click();
       cy.wait(["@hyperparamUnauthorized"]);
-      
-      cy.on('window:alert', (str) => {
+
+      cy.on("window:alert", (str) => {
         expect(str).to.equal("Your session has expired, Please sign in again.");
       });
     });
@@ -187,7 +189,7 @@ describe("Hyperparameter Adjustment Page", () => {
       cy.get("[for='window_size'] > .dms-number-input").type(5);
       cy.get("[for='min_count'] > .dms-number-input").type(5);
       cy.get("[for='subsample'] > .dms-number-input").type(0.001);
-  
+
       cy.intercept(
         {
           method: "POST",
@@ -197,9 +199,9 @@ describe("Hyperparameter Adjustment Page", () => {
           fixture: "sampleFilterTask",
         }
       ).as("interceptTrainTask");
-  
+
       cy.get(".dms-button").contains("Train Model").click();
-  
+
       cy.wait("@interceptTrainTask").then((req) => {
         expect(req.request.body.hparams).to.deep.equal({
           embedding_size: 200,
@@ -225,7 +227,7 @@ describe("Hyperparameter Adjustment Page", () => {
       cy.get("[for='window_size'] > .dms-number-input").type(5);
       cy.get("[for='min_count'] > .dms-number-input").type(5);
       cy.get("[for='subsample'] > .dms-number-input").type(0.001);
-  
+
       cy.intercept(
         {
           method: "POST",
@@ -235,9 +237,9 @@ describe("Hyperparameter Adjustment Page", () => {
           fixture: "sampleFilterTask",
         }
       ).as("interceptTrainTask");
-  
+
       cy.get(".dms-button").contains("Train Model").click();
-  
+
       cy.wait("@interceptTrainTask").then((req) => {
         expect(req.request.body.dataset_id).to.equal(43);
       });
@@ -247,24 +249,26 @@ describe("Hyperparameter Adjustment Page", () => {
       cy.intercept("POST", "/train-task", {
         statusCode: 422,
       }).as("interceptTrainTask");
-  
+
       cy.get(".dms-button").contains("Train Model").click();
       cy.wait(["@interceptTrainTask"]);
-  
+
       cy.contains("Please complete all fields.");
     });
-  
+
     it("should show generic error message on API fail", () => {
       cy.intercept("POST", "/train-task", {
         statusCode: 404,
       }).as("interceptTrainTask");
-  
+
       cy.get(".dms-button").contains("Train Model").click();
       cy.wait(["@interceptTrainTask"]);
-  
-      cy.contains("There was an error processing this request. Please try again later");
+
+      cy.contains(
+        "There was an error processing this request. Please try again later"
+      );
     });
-  
+
     it("should route to home page on form submit", () => {
       cy.intercept("POST", "/train-task", {
         body: {
@@ -282,7 +286,7 @@ describe("Hyperparameter Adjustment Page", () => {
           dataset_id: 0,
         },
       }).as("interceptTrainTask");
-  
+
       cy.get(".dms-button").contains("Train Model").click();
       cy.url().should("include", "/home");
     });

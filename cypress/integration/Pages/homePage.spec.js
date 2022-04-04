@@ -25,7 +25,7 @@ describe("Home Page", () => {
           "Space separated keywords..."
         );
       });
-  
+
       it("should have submit button for keywords with plus icon", () => {
         cy.get(".keyword-submit-button")
           .find("svg")
@@ -34,18 +34,16 @@ describe("Home Page", () => {
     });
 
     describe("White box tests", () => {
-      it ('should not send a request to filter-task if keywords are empty', () => {
-        cy.intercept(
-          {
-            method: "GET",
-            path: "/filter-task",
-          }
-        ).as("interceptFilter");
-  
+      it("should not send a request to filter-task if keywords are empty", () => {
+        cy.intercept({
+          method: "GET",
+          path: "/filter-task",
+        }).as("interceptFilter");
+
         cy.get(".keyword-submit-button").click();
-  
+
         cy.wait(["@interceptFilter"]);
-  
+
         // Expect API call to fail to be intercepted
         cy.on("fail", (err) => {
           expect(err.message).to.include(
@@ -54,8 +52,8 @@ describe("Home Page", () => {
           done();
         });
       });
-  
-      it ('should send keywords to request in lowercase', () => {
+
+      it("should send keywords to request in lowercase", () => {
         cy.intercept(
           {
             method: "POST",
@@ -65,16 +63,16 @@ describe("Home Page", () => {
             fixture: "sampleFilterTask",
           }
         ).as("interceptFilter");
-  
+
         cy.get(".dms-keyword-bar").type("KEYWORD");
         cy.get(".keyword-submit-button").click();
-  
+
         cy.wait("@interceptFilter").then((req) => {
-          expect(req.request.body.keywords[0]).to.equal('keyword');
+          expect(req.request.body.keywords[0]).to.equal("keyword");
         });
       });
-  
-      it ('should send keywords when enter is typed versus clicking the button', () => {
+
+      it("should send keywords when enter is typed versus clicking the button", () => {
         cy.intercept(
           {
             method: "POST",
@@ -84,25 +82,27 @@ describe("Home Page", () => {
             fixture: "sampleFilterTask",
           }
         ).as("interceptFilter");
-  
+
         cy.get(".dms-keyword-bar").type("test{enter}");
-  
+
         cy.wait("@interceptFilter").then((req) => {
-          expect(req.request.body.keywords[0]).to.equal('test');
+          expect(req.request.body.keywords[0]).to.equal("test");
         });
       });
-  
+
       it("should show alert if 401 error is thrown on keyword submit", () => {
         cy.intercept("POST", "/filter-task", {
           statusCode: 401,
         }).as("filterUnauthed");
-    
+
         cy.get(".dms-keyword-bar").type("test{enter}");
-  
+
         cy.wait(["@filterUnauthed"]);
-        
-        cy.on('window:alert', (str) => {
-          expect(str).to.equal("Your session has expired, Please sign in again.");
+
+        cy.on("window:alert", (str) => {
+          expect(str).to.equal(
+            "Your session has expired, Please sign in again."
+          );
         });
       });
     });
@@ -128,25 +128,25 @@ describe("Home Page", () => {
       it('should have "Data Mining System" in the header', () => {
         cy.get("#header").should("have.text", "Data Mining System");
       });
-  
+
       it("should have a clickable profile icon in the header", () => {
         cy.get("#profile-icon")
           .invoke("css", "cursor")
           .should("equal", "pointer");
       });
-  
+
       it('should have "New Dataset" title', () => {
         cy.get(".new-dataset-text").should("have.text", "New Dataset");
       });
-  
+
       it("should have dataset tab", () => {
         cy.get(".dms-tab-navigator").contains("Datasets");
       });
-  
+
       it("should have models tab", () => {
         cy.get(".dms-tab-navigator").contains("Models");
       });
-  
+
       it("should have dataset tab selected", () => {
         cy.get(".active").contains("Datasets");
       });
@@ -169,14 +169,14 @@ describe("Home Page", () => {
             fixture: "sampleDatasets",
           }
         ).as("delayedIntercept");
-  
+
         cy.visit(url + "/home");
-  
+
         cy.get(".dms-loading-indicator").should("exist");
-  
+
         cy.wait(["@delayedIntercept"]);
       });
-  
+
       it("should show message when no datasets are returned", () => {
         cy.intercept(
           {
@@ -187,10 +187,10 @@ describe("Home Page", () => {
             fixture: "emptyArray",
           }
         ).as("emptyResponse");
-  
+
         cy.visit(url + "/home");
         cy.wait(["@emptyResponse"]);
-  
+
         cy.contains(
           "You have no datasets. Enter keywords into the input above to generate a new dataset."
         );
@@ -212,7 +212,7 @@ describe("Home Page", () => {
             fixture: "sampleDatasets",
           }
         ).as("sampleDatasets");
-  
+
         cy.visit(url + "/home");
         cy.wait(["@sampleDatasets"]);
 
@@ -223,13 +223,15 @@ describe("Home Page", () => {
         cy.intercept("GET", "/filter-task", {
           statusCode: 401,
         }).as("trainTaskUnauthed");
-    
+
         cy.reload();
-  
+
         cy.wait(["@trainTaskUnauthed"]);
-        
-        cy.on('window:alert', (str) => {
-          expect(str).to.equal("Your session has expired, Please sign in again.");
+
+        cy.on("window:alert", (str) => {
+          expect(str).to.equal(
+            "Your session has expired, Please sign in again."
+          );
         });
       });
 
@@ -243,7 +245,7 @@ describe("Home Page", () => {
             fixture: "loadingDataset",
           }
         ).as("loadingDataset");
-  
+
         cy.visit(url + "/home");
         cy.wait(["@loadingDataset"]);
 
@@ -260,7 +262,7 @@ describe("Home Page", () => {
             fixture: "loadingDataset",
           }
         ).as("loadingDataset");
-  
+
         cy.visit(url + "/home");
         cy.wait(["@loadingDataset"]);
 
@@ -312,15 +314,15 @@ describe("Home Page", () => {
       it('should have "Data Mining System" in the header', () => {
         cy.get("#header").should("have.text", "Data Mining System");
       });
-  
+
       it("should have dataset tab", () => {
         cy.get(".dms-tab-navigator").contains("Datasets");
       });
-  
+
       it("it should have models tab", () => {
         cy.get(".dms-tab-navigator").contains("Models");
       });
-  
+
       it("should have models tab selected", () => {
         cy.get(".active").contains("Models");
       });
@@ -355,9 +357,11 @@ describe("Home Page", () => {
         cy.wait(["@sampleDatasets"]);
         cy.get(".dms-tab-navigator").contains("Models").click();
         cy.wait(["@sampleModels"]);
-  
-        cy.on('window:alert', (str) => {
-          expect(str).to.equal("Your session has expired, Please sign in again.");
+
+        cy.on("window:alert", (str) => {
+          expect(str).to.equal(
+            "Your session has expired, Please sign in again."
+          );
         });
       });
 
@@ -386,16 +390,16 @@ describe("Home Page", () => {
             fixture: "sampleModels",
           }
         ).as("delayedIntercept");
-  
+
         cy.visit(url + "/home");
         cy.wait(["@sampleDatasets"]);
         cy.get(".dms-tab-navigator").contains("Models").click();
-  
+
         cy.get(".dms-loading-indicator").should("exist");
-  
+
         cy.wait(["@delayedIntercept"]);
       });
-  
+
       it("should show message when no models are returned", () => {
         cy.intercept(
           {
@@ -415,12 +419,12 @@ describe("Home Page", () => {
             fixture: "emptyArray",
           }
         ).as("emptyResponse");
-  
+
         cy.visit(url + "/home");
         cy.wait(["@sampleDatasets"]);
         cy.get(".dms-tab-navigator").contains("Models").click();
         cy.wait(["@emptyResponse"]);
-  
+
         cy.contains(
           "You have no models. Train your datasets to generate a new model."
         );
