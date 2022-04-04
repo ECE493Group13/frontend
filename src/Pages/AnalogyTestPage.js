@@ -27,7 +27,7 @@ export const AnalogyTestPage = () => {
       !route.state.word_b ||
       !route.state.trained_model_id
     ) {
-      navigate("/");
+      navigate("/home");
       return;
     }
 
