@@ -85,7 +85,6 @@ export const DatasetTab = () => {
         });
         setDatasets(
           json
-            .filter((dataset) => !dataset.is_error)
             .sort(function (a, b) {
               return (
                 new Date(a.created).getTime() - new Date(b.created).getTime()
@@ -111,6 +110,7 @@ export const DatasetTab = () => {
               numPapers={dataset.dataset?.num_papers}
               date={dataset.created.split("T")[0]}
               showLoadingIndicator={!dataset.is_complete}
+              isError={dataset.is_error}
             />
           );
         })}

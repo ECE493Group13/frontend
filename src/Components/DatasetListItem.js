@@ -8,6 +8,7 @@ export const DatasetListItem = ({
   numPapers,
   date,
   showLoadingIndicator,
+  isError,
 }) => {
   const navigate = useNavigate();
 
@@ -16,6 +17,7 @@ export const DatasetListItem = ({
   };
 
   const getNumPapersSubtitle = () => {
+    if (isError) return <p className="num-papers-text error-message">Failed</p>;
     if (numPapers === undefined) return;
     if (numPapers === 0)
       return <p className="num-papers-text error-message">Empty dataset</p>;
@@ -38,7 +40,7 @@ export const DatasetListItem = ({
         )}
         <Button
           buttonText={"Train"}
-          disabled={showLoadingIndicator}
+          disabled={isError || showLoadingIndicator}
           onClick={openHyperparameterAdjustmentForm}
         />
       </div>
