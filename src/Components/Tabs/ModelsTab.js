@@ -49,7 +49,6 @@ export const ModelsTab = () => {
         });
         setModels(
           json
-            .filter((model) => !model.is_error)
             .sort(function (a, b) {
               return (
                 new Date(a.created).getTime() - new Date(b.created).getTime()
@@ -102,11 +101,13 @@ export const ModelsTab = () => {
               title={model.dataset.name}
               numPapers={model.dataset.num_papers}
               hyperparameters={JSON.parse(model.hparams)}
-              date={model.created.split("T")[0]}
+              startTime={model.start_time}
+              endTime={model.end_time}
               showLoadingIndicator={
                 !model.is_complete && model.start_time !== null
               }
               disableButtons={!model.is_complete}
+              isError={model.is_error}
             />
           );
         })}
