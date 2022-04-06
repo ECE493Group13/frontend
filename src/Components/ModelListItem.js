@@ -3,13 +3,16 @@ import { Button } from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasksAlt } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { capitalizeFirstLetters } from "../Components/Tabs/DatasetTab";
 
 export const ModelListItem = ({
   title,
   numPapers,
-  date,
+  startTime,
+  endTime,
   trainedModelId,
   trainTaskId,
+  isError,
   hyperparameters,
   showLoadingIndicator,
   disableButtons,
@@ -22,6 +25,11 @@ export const ModelListItem = ({
 
   const openClosestWordForm = () => {
     navigate("/closestWords", { state: { trainedModelId } });
+  };
+
+  const getFormattedTime = (time) => {
+    if (time === null) return " - ";
+    return new Date(time).toLocaleString();
   };
 
   const getNumPapersSubtitle = () => {
@@ -52,8 +60,21 @@ export const ModelListItem = ({
             <p>Sub Sample: {hyperparameters.subsample}</p>
           </span>
         </div>
-        <p className="grey-text">{date}</p>
-        <p>{title}</p>
+        <div className="flex-column">
+          <p className="grey-text model-date">
+            Started: {getFormattedTime(startTime)}
+          </p>
+          {isError ? (
+            <p className="red-text model-date">
+              Failed: {getFormattedTime(endTime)}
+            </p>
+          ) : (
+            <p className="grey-text model-date">
+              Ended: {getFormattedTime(endTime)}
+            </p>
+          )}
+        </div>
+        <p>{capitalizeFirstLetters(title)}</p>
         {getNumPapersSubtitle()}
       </div>
       <div className="list-item-text flex-row-sb">
@@ -65,12 +86,12 @@ export const ModelListItem = ({
         )}
         <Button
           buttonText={"Validate"}
-          disabled={disableButtons}
+          disabled={isError || disableButtons}
           onClick={openClosestWordForm}
         />
         <Button
           buttonText={"Visualize"}
-          disabled={disableButtons}
+          disabled={isError || disableButtons}
           onClick={openVisualization}
         />
       </div>
