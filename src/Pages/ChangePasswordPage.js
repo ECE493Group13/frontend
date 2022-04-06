@@ -50,9 +50,13 @@ export const ChangePasswordPage = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          setErrorMessage(
-            "There was an error processing this request. Please try again later."
-          );
+          if (response.status === 401) {
+            setErrorMessage("Old password does not match temporary password");
+          } else {
+            setErrorMessage(
+              "There was an error processing this request. Please try again later."
+            );
+          }
           throw new Error("HTTP status " + response.status);
         }
       })

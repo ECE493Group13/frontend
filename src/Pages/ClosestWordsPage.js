@@ -18,8 +18,9 @@ export const ClosestWordsPage = () => {
   const route = useLocation();
 
   useEffect(() => {
-    if (!route.state?.trainedModelId) {
-      navigate("/");
+    if (!route || !route.state || !route.state.trainedModelId) {
+      navigate("/home");
+      return;
     }
     setTrainedModelId(route.state.trainedModelId);
   }, []);
