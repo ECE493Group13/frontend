@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR5, 6, 9, 12
- * 
+ *
  */
 
 import React, { useEffect } from "react";

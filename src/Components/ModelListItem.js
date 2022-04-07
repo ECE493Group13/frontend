@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR9
- * 
+ *
  */
 
 import React from "react";

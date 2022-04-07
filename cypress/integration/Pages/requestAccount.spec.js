@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR1
- * 
+ *
  */
 
 describe("Change Password Page", () => {

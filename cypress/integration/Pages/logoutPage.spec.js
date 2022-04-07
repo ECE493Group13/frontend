@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR4
- * 
+ *
  */
 
 describe("Logout Page", () => {

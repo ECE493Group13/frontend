@@ -1,7 +1,7 @@
 /**
- * 
- * Funtional Requirements: FR1, 2, 3, 
- * 
+ *
+ * Funtional Requirements: FR1, 2, 3,
+ *
  */
 
 import React, { useState } from "react";

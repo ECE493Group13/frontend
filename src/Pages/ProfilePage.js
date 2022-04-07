@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR3, 4
- * 
+ *
  */
 
 import React from "react";

@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR10.2
- * 
+ *
  */
 
 import React, { useState, useEffect } from "react";

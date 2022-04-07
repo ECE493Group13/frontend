@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR1-12
- * 
+ *
  */
 
 import "./App.css";

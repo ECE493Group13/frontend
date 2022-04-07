@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR5
- * 
+ *
  */
 
 import React, { useState } from "react";

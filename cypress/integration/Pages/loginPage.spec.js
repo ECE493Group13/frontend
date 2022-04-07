@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR2
- * 
+ *
  */
 
 describe("Login Page", () => {

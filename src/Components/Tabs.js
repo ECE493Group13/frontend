@@ -1,7 +1,7 @@
 /**
- * 
- * Funtional Requirements: FR6, 9 
- * 
+ *
+ * Funtional Requirements: FR6, 9
+ *
  */
 
 import React, { useState } from "react";

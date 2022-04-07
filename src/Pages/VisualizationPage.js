@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR11
- * 
+ *
  */
 
 import React, { useState, useEffect } from "react";

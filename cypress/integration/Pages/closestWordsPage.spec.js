@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * Funtional Requirements: FR10.1
- * 
+ *
  */
 
 describe("Closest Words Page", () => {

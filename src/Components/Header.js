@@ -1,9 +1,9 @@
 /**
- * 
+ *
  * Provides a way to access the home page and profile page
- * 
+ *
  * Funtional Requirements: No functional requirements mandate the inclusion of this file
- * 
+ *
  */
 
 import React from "react";
