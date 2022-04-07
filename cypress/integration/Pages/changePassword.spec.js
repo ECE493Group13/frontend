@@ -10,10 +10,6 @@ describe("Change Password Page", () => {
       cy.get("#header").should("have.text", "Data Mining System");
     });
 
-    it('it should have "Data Mining System" in the header', () => {
-      cy.get("#header").should("have.text", "Data Mining System");
-    });
-
     it("it should not have profile icon in the header", () => {
       cy.get("#profile-icon").should("not.exist");
     });
