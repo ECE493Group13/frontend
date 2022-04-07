@@ -216,7 +216,7 @@ describe("Home Page", () => {
         cy.visit(url + "/home");
         cy.wait(["@sampleDatasets"]);
 
-        cy.get(".first-tab > :nth-child(2)").contains("Empty dataset");
+        cy.get(".first-tab > :nth-child(3)").contains("Empty dataset");
       });
 
       it("should show alert if GET/train-task throws 401", () => {
