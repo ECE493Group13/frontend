@@ -17,8 +17,9 @@ export const VisualizationPage = () => {
     if (sessionStorage.getItem("token") === null) {
       navigate("/");
     }
-    if (route.state.trainTaskId === undefined) {
-      navigate("/");
+    if (!route || !route.state || !route.state.trainTaskId) {
+      navigate("/home");
+      return;
     }
     fetchChartData(route.state.trainTaskId);
   }, []);

@@ -4,6 +4,14 @@ import { API_BASE_URL } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import { LoadingIndicator } from "../LoadingIndicator";
 
+export const capitalizeFirstLetters = (title) => {
+  return title
+    .toLowerCase()
+    .split(" ")
+    .map((token) => token.charAt(0).toUpperCase() + token.substring(1))
+    .join(" ");
+};
+
 export const DatasetTab = () => {
   const [datasets, setDatasets] = useState([]);
   const [fetchComplete, setFetchComplete] = useState(false);
@@ -77,7 +85,6 @@ export const DatasetTab = () => {
         });
         setDatasets(
           json
-            .filter((dataset) => !dataset.is_error)
             .sort(function (a, b) {
               return (
                 new Date(a.created).getTime() - new Date(b.created).getTime()
@@ -89,14 +96,6 @@ export const DatasetTab = () => {
       .catch((e) => {
         console.log(e);
       });
-  };
-
-  const capitalizeFirstLetters = (title) => {
-    return title
-      .toLowerCase()
-      .split(" ")
-      .map((token) => token.charAt(0).toUpperCase() + token.substring(1))
-      .join(" ");
   };
 
   return (
@@ -111,6 +110,7 @@ export const DatasetTab = () => {
               numPapers={dataset.dataset?.num_papers}
               date={dataset.created.split("T")[0]}
               showLoadingIndicator={!dataset.is_complete}
+              isError={dataset.is_error}
             />
           );
         })}

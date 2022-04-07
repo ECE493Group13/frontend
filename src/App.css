@@ -256,9 +256,18 @@ ul.dms-tab-navigator li.active {
   color: #c3c3c3;
 }
 
+.red-text {
+  color: #f03107;
+}
+
+.model-date {
+  margin: 0 10px 0 20px;
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
+  margin: auto;
 }
 
 .tooltip .tooltip-content {
