@@ -1,6 +1,6 @@
 /**
  *
- * Funtional Requirements: FR1-12
+ * FunctionalRequirements: FR1-12
  *
  */
 

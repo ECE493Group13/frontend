@@ -1,6 +1,6 @@
 /**
  *
- * Funtional Requirements: FR4
+ * FunctionalRequirements: FR4
  *
  */
 

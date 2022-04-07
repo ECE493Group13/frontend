@@ -1,6 +1,6 @@
 /**
  *
- * Funtional Requirements: FR10.2
+ * FunctionalRequirements: FR10.2
  *
  */
 

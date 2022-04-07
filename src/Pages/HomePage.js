@@ -1,6 +1,6 @@
 /**
  *
- * Funtional Requirements: FR5, 6, 9, 12
+ * FunctionalRequirements: FR5, 6, 9, 12
  *
  */
 
