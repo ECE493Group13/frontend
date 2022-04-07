@@ -1,9 +1,12 @@
-import { completeAccountUsername, completeAccountPassword } from "../secrets.js";
+import {
+  completeAccountUsername,
+  completeAccountPassword,
+} from "../secrets.js";
 
 describe("Visualize", () => {
-	const url = "http://localhost:3000";
+  const url = "http://localhost:3000";
 
-	beforeEach(() => {
+  beforeEach(() => {
     cy.visit(url);
 
     // Login
@@ -12,11 +15,11 @@ describe("Visualize", () => {
     cy.get(".dms-button").contains("Log in").click();
   });
 
-  it('should request plot data and recieve the correct arrays in the response', () => {
+  it("should request plot data and recieve the correct arrays in the response", () => {
     cy.get(".dms-tab-navigator > :nth-child(2)").click();
     cy.get("#visualizeButton").click();
 
-    cy.intercept('/visualize?train_task_id=52').as("plotData");
+    cy.intercept("/visualize?train_task_id=52").as("plotData");
 
     cy.wait("@plotData").then((req) => {
       const body = JSON.parse(req.response.body);
@@ -25,5 +28,5 @@ describe("Visualize", () => {
       expect(Array.isArray(body.x)).to.equal(true);
       expect(Array.isArray(body.y)).to.equal(true);
     });
-	});
+  });
 });
