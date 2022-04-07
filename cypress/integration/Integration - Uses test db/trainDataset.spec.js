@@ -17,6 +17,8 @@ describe("Train Dataset", () => {
   });
 
   it("should suggest correct hyperparameters", () => {
+    cy.get("#trainButton").first().click();
+
     cy.get('[for="embedding_size"] > .dms-number-input').should(
       "have.attr",
       "placeholder",
@@ -35,7 +37,7 @@ describe("Train Dataset", () => {
     cy.get('[for="num_neg_samples"] > .dms-number-input').should(
       "have.attr",
       "placeholder",
-      "25"
+      "5"
     );
     cy.get('[for="batch_size"] > .dms-number-input').should(
       "have.attr",
@@ -45,7 +47,7 @@ describe("Train Dataset", () => {
     cy.get('[for="concurrent_steps"] > .dms-number-input').should(
       "have.attr",
       "placeholder",
-      "12"
+      "6"
     );
     cy.get('[for="window_size"] > .dms-number-input').should(
       "have.attr",
