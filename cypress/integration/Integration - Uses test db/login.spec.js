@@ -30,7 +30,7 @@ describe("Login", () => {
     cy.url().should("include", "/home");
   });
 
-  it("should route to home page on complete login", () => {
+  it("should route to change password page on complete login", () => {
     cy.get("#input1").type(incompleteAccountUsername2);
     cy.get("#input2").type(incompleteAccountPassword2);
 
