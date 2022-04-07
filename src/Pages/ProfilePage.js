@@ -1,3 +1,9 @@
+/**
+ * 
+ * Funtional Requirements: FR3, 4
+ * 
+ */
+
 import React from "react";
 import { Button } from "../Components/Button";
 import { Header } from "../Components/Header";

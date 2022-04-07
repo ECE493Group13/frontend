@@ -1,3 +1,9 @@
+/**
+ * 
+ * Funtional Requirements: FR2
+ * 
+ */
+
 import React, { useState } from "react";
 import { DoubleInputFormCard } from "../Components/DoubleInputFormCard";
 import { useNavigate } from "react-router-dom";

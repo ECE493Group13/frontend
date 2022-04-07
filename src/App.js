@@ -1,3 +1,9 @@
+/**
+ * 
+ * Funtional Requirements: FR1-12
+ * 
+ */
+
 import "./App.css";
 import { LoginPage } from "./Pages/LoginPage";
 import { HomePage } from "./Pages/HomePage";
