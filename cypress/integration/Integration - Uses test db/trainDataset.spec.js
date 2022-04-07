@@ -18,7 +18,7 @@ describe("Train Dataset", () => {
 
   it("should train model with correct id", () => {
     cy.get("#trainButton").first().click();
-    
+
     cy.get("[for='embedding_size'] > .dms-number-input").type(200);
     cy.get("[for='epochs_to_train'] > .dms-number-input").type(15);
     cy.get("[for='learning_rate'] > .dms-number-input").type(0.025);
