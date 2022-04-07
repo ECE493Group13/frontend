@@ -37,6 +37,6 @@ describe("Logout Page", () => {
     it("should redirect to change password page when change password is clicked", () => {
       cy.get(".dms-button").contains("Change Password").click();
       cy.url().should("include", "/changePassword");
-    }); 
+    });
   });
 });
