@@ -1,3 +1,9 @@
+/**
+ *
+ * Functional Requirements: FR2
+ *
+ */
+
 describe("Login Page", () => {
   const url = "http://localhost:3000";
 
