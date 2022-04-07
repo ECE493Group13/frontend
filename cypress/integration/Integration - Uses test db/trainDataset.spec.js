@@ -16,6 +16,54 @@ describe("Train Dataset", () => {
     cy.wait(2000);
   });
 
+  it("should suggest correct hyperparameters", () => {
+    cy.get('[for="embedding_size"] > .dms-number-input').should(
+      "have.attr",
+      "placeholder",
+      "200"
+    );
+    cy.get('[for="epochs_to_train"] > .dms-number-input').should(
+      "have.attr",
+      "placeholder",
+      "15"
+    );
+    cy.get('[for="learning_rate"] > .dms-number-input').should(
+      "have.attr",
+      "placeholder",
+      "0.025"
+    );
+    cy.get('[for="num_neg_samples"] > .dms-number-input').should(
+      "have.attr",
+      "placeholder",
+      "25"
+    );
+    cy.get('[for="batch_size"] > .dms-number-input').should(
+      "have.attr",
+      "placeholder",
+      "500"
+    );
+    cy.get('[for="concurrent_steps"] > .dms-number-input').should(
+      "have.attr",
+      "placeholder",
+      "12"
+    );
+    cy.get('[for="window_size"] > .dms-number-input').should(
+      "have.attr",
+      "placeholder",
+      "5"
+    );
+    cy.get('[for="min_count"] > .dms-number-input').should(
+      "have.attr",
+      "placeholder",
+      "5"
+    );
+    cy.get('[for="subsample"] > .dms-number-input').should(
+      "have.attr",
+      "placeholder",
+      "0.001"
+    );
+  });
+
   it("should train model with correct id", () => {
     cy.get("#trainButton").first().click();
 
