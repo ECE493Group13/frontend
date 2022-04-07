@@ -33,7 +33,7 @@ describe("Change Password", () => {
 
     cy.get("#submit-button").find("button").click();
     cy.contains(
-      "There was an error processing this request. Please try again later."
+      "Old password does not match temporary password"
     );
   });
 
