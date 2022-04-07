@@ -1,6 +1,6 @@
 /**
  *
- * FunctionalRequirements: FR7, 8
+ * Functional Requirements: FR7, 8
  *
  */
 

@@ -2,7 +2,7 @@
  *
  * Provides a way to access the home page and profile page
  *
- * FunctionalRequirements: No functional requirements mandate the inclusion of this file
+ * Functional Requirements: No functional requirements mandate the inclusion of this file
  *
  */
 
