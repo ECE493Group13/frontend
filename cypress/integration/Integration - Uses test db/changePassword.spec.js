@@ -32,9 +32,7 @@ describe("Change Password", () => {
     cy.get("#input2").clear().type(newPassword);
 
     cy.get("#submit-button").find("button").click();
-    cy.contains(
-      "Old password does not match temporary password"
-    );
+    cy.contains("Old password does not match temporary password");
   });
 
   it("should redirect home on successfull password change", () => {
