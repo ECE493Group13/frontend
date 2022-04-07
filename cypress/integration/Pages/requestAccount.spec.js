@@ -100,7 +100,7 @@ describe("Change Password Page", () => {
       );
     });
 
-    it("should navigate to home page on success", () => {
+    it("should navigate to login page on success", () => {
       cy.intercept("POST", "/register").as("registerIntercept");
 
       cy.get("#input1").type("someinput");

@@ -49,7 +49,7 @@ describe("Login Page", () => {
     });
   });
 
-  describe("Black box tests", () => {
+  describe("White box tests", () => {
     it("should show error message if username or password is incorrect", () => {
       const username = "test_username";
       const password = "test_password";
