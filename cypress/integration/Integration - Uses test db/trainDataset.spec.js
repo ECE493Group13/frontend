@@ -14,7 +14,7 @@ describe("Train Dataset", () => {
   });
 
   it('should train model with correct id', () => {
-    cy.get(".dms-button").contains("Train").first().click();
+    cy.get("#trainButton").first().click();
     
     cy.get("[for='embedding_size'] > .dms-number-input").type(200);
     cy.get("[for='epochs_to_train'] > .dms-number-input").type(15);
@@ -35,8 +35,8 @@ describe("Train Dataset", () => {
     });
   });
 
-  it ('should show newly trained model in models list', () => {
+  it('should show newly trained model in models list', () => {
     cy.get(".dms-tab-navigator > :nth-child(2)").click();
-    cy.contains("flu");
+    cy.contains("Flu");
   });
 });

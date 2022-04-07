@@ -1,4 +1,4 @@
-import { completeAccountUsername, completeAccountPassword, incompleteAccountUsername, incompleteAccountPassword } from "../secrets.js";
+import { completeAccountUsername, completeAccountPassword, incompleteAccountUsername2, incompleteAccountPassword2 } from "../secrets.js";
 
 describe("Login", () => {
     const url = "http://localhost:3000";
@@ -25,9 +25,9 @@ describe("Login", () => {
         cy.url().should('include', '/home');
     });
 
-    it('should route to home page on complete login', () => {
-        cy.get("#input1").type(incompleteAccountUsername);
-        cy.get("#input2").type(incompleteAccountPassword);
+    it('should route to change password page on incomplete login', () => {
+        cy.get("#input1").type(incompleteAccountUsername2);
+        cy.get("#input2").type(incompleteAccountPassword2);
 
         cy.get(".dms-button").contains("Log in").click();
 
