@@ -25,11 +25,21 @@ export const ProfilePage = () => {
       });
   };
 
+  const onRequestChangePassword = () => {
+    navigate("/changePassword");
+  };
+
   return (
     <div>
       <Header showProfileIcon />
       <div className="logout-button">
         <Button buttonText={"Logout"} onClick={onRequestLogout} />
+      </div>
+      <div className="change-password-button">
+        <Button
+          buttonText={"Change Password"}
+          onClick={onRequestChangePassword}
+        />
       </div>
     </div>
   );

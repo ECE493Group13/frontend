@@ -20,14 +20,23 @@ describe("Logout Page", () => {
     it("it should have a logout button", () => {
       cy.get(".logout-button").contains("Logout");
     });
+
+    it("it should have a change password button", () => {
+      cy.get(".change-password-button").contains("Change Password");
+    });
   });
 
   describe("Black box tests", () => {
-    it("should redirect to home page when logout is clicked", () => {
+    it("should redirect to login page when logout is clicked", () => {
       cy.intercept("POST", "/auth/logout").as("logout");
       cy.get(".dms-button").contains("Logout").click();
 
       cy.url().should("include", "/");
     });
+
+    it("should redirect to change password page when change password is clicked", () => {
+      cy.get(".dms-button").contains("Change Password").click();
+      cy.url().should("include", "/changePassword");
+    }); 
   });
 });
