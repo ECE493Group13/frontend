@@ -1,3 +1,9 @@
+/**
+ *
+ * Functional Requirements: FR5, 6, 8, 9, 11, 12
+ *
+ */
+
 describe("Home Page", () => {
   const url = "http://localhost:3000";
 

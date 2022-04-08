@@ -1,3 +1,9 @@
+/**
+ *
+ * Functional Requirements: FR4
+ *
+ */
+
 describe("Logout Page", () => {
   const url = "http://localhost:3000";
 
