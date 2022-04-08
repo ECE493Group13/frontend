@@ -18,7 +18,7 @@ describe("Logout Page", () => {
     });
 
     it("it should have a logout button", () => {
-      cy.get(".logout-button").contains("Logout");
+      cy.get(".logout-button").contains("Log out");
     });
 
     it("it should have a change password button", () => {
@@ -29,7 +29,7 @@ describe("Logout Page", () => {
   describe("Black box tests", () => {
     it("should redirect to login page when logout is clicked", () => {
       cy.intercept("POST", "/auth/logout").as("logout");
-      cy.get(".dms-button").contains("Logout").click();
+      cy.get(".dms-button").contains("Log out").click();
 
       cy.url().should("include", "/");
     });
