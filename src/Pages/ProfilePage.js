@@ -1,3 +1,9 @@
+/**
+ *
+ * Functional Requirements: FR3, 4
+ *
+ */
+
 import React from "react";
 import { Button } from "../Components/Button";
 import { Header } from "../Components/Header";
@@ -33,7 +39,7 @@ export const ProfilePage = () => {
     <div>
       <Header showProfileIcon />
       <div className="logout-button">
-        <Button buttonText={"Logout"} onClick={onRequestLogout} />
+        <Button buttonText={"Log out"} onClick={onRequestLogout} />
       </div>
       <div className="change-password-button">
         <Button

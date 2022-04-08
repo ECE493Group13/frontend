@@ -1,3 +1,9 @@
+/**
+ *
+ * Functional Requirements: FR9
+ *
+ */
+
 import React from "react";
 import { Button } from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -85,11 +91,13 @@ export const ModelListItem = ({
           </div>
         )}
         <Button
+          id={disableButtons ? "validateButtonDisabled" : "validateButton"}
           buttonText={"Validate"}
           disabled={isError || disableButtons}
           onClick={openClosestWordForm}
         />
         <Button
+          id={disableButtons ? "visualizeButtonDisabled" : "visualizeButton"}
           buttonText={"Visualize"}
           disabled={isError || disableButtons}
           onClick={openVisualization}

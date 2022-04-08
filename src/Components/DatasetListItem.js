@@ -1,3 +1,9 @@
+/**
+ *
+ * Functional Requirements: FR6
+ *
+ */
+
 import React from "react";
 import { Button } from "./Button";
 import { useNavigate } from "react-router-dom";
@@ -39,6 +45,11 @@ export const DatasetListItem = ({
           </div>
         )}
         <Button
+          id={
+            isError || showLoadingIndicator
+              ? "trainButtonDisabled"
+              : "trainButton"
+          }
           buttonText={"Train"}
           disabled={isError || showLoadingIndicator}
           onClick={openHyperparameterAdjustmentForm}

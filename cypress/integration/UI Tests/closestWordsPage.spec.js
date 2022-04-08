@@ -1,4 +1,10 @@
-describe("Analogy Test Page", () => {
+/**
+ *
+ * Functional Requirements: FR10.1
+ *
+ */
+
+describe("Closest Words Page", () => {
   const url = "http://localhost:3000";
 
   beforeEach(() => {
@@ -29,23 +35,7 @@ describe("Analogy Test Page", () => {
     cy.wait(["@sampleModels"]);
 
     cy.get(".dms-button").contains("Validate").click();
-
-    cy.intercept(
-      {
-        method: "GET",
-        path: "/verify/most-similar?word=word&count=100&trained_model_id=15",
-      },
-      {
-        fixture: "closestWords",
-      }
-    ).as("closestWords");
-
-    cy.get("#closest-word-input").type("word");
-    cy.get(".dms-button").contains("Submit").click();
-
-    cy.wait(["@closestWords"]);
-
-    cy.get("tbody > :nth-child(2) > :nth-child(1)").click();
+    cy.visit(url + "/closestWords");
   });
 
   describe("Black box tests", () => {
@@ -59,31 +49,24 @@ describe("Analogy Test Page", () => {
         .should("equal", "pointer");
     });
 
-    it('should have "Analogy Test" title', () => {
-      cy.contains("Analogy Test");
+    it('should have "Closest Words" title', () => {
+      cy.contains("Closest Words");
     });
 
-    it('should have "Enter a third word below to perform an analogy test on the given words.', () => {
+    it('should have "Enter a word below to receive the n most similar words to it" subtitle', () => {
       cy.contains(
-        "Enter a third word below to perform an analogy test on the given words."
+        "Enter a word below to receive the n most similar words to it"
       );
     });
 
-    it("should contain the text entered on the previous page", () => {
-      cy.get(".analogy-test-paragraph > :nth-child(1)").contains("word");
+    it('should have a text input with "Word" placeholder', () => {
+      cy.get("[type='text']").should("have.attr", "placeholder", "Word");
     });
 
-    it('should have a text input with "Word is to..." placeholder', () => {
-      cy.get("[type='text']").should(
-        "have.attr",
-        "placeholder",
-        "Word is to..."
-      );
+    it("should have a number input with default value 100", () => {
+      cy.get("[type='number']").should("have.attr", "value", "100");
     });
 
-    it("should have a number input with default value 500", () => {
-      cy.get("[type='number']").should("have.attr", "value", "500");
-    });
     it("accepts word input", () => {
       const input = "word";
       cy.get("#closest-word-input").type(input).should("have.value", input);
@@ -102,12 +85,6 @@ describe("Analogy Test Page", () => {
       cy.contains("Please enter a word");
     });
 
-    it("should contain the text clicked on the previous page", () => {
-      cy.get(".analogy-test-paragraph > :nth-child(2)").contains("facial");
-    });
-  });
-
-  describe("White box tests", () => {
     it("should show error message if non-number is entered in number field", () => {
       const input = "e";
       cy.get("#closest-word-input").type(input);
@@ -128,10 +105,10 @@ describe("Analogy Test Page", () => {
       cy.get(".dms-button").contains("Submit").click();
       cy.contains("Please enter a positive number");
     });
+  });
 
-    it("should route home if word A, word B and traned model ID is not defined", () => {
-      cy.visit(url + "/home");
-
+  describe("White box tests", () => {
+    it("should route to home page if trained model Id is not given", () => {
       cy.intercept(
         {
           method: "GET",
@@ -141,72 +118,48 @@ describe("Analogy Test Page", () => {
           fixture: "sampleDatasets",
         }
       ).as("sampleDatasets");
+      cy.visit(url + "/home");
       cy.wait(["@sampleDatasets"]);
 
-      cy.visit(url + "/analogyTest");
+      cy.visit(url + "/closestWords");
       cy.wait(2000);
       cy.url().should("include", "/home");
     });
 
-    it("should show alert if /verify/analogy-test throws 401", () => {
+    it("should show alert if API throws 401", () => {
       cy.intercept(
         "GET",
-        "/verify/analogy-test?word_a=word&word_b=facial&word_c=word&trained_model_id=15&count=500",
+        "/verify/most-similar?word=word&count=100&trained_model_id=15",
         {
           statusCode: 401,
         }
-      ).as("analogyTestUnauthed");
+      ).as("closestWordsUnauthed");
 
       cy.get("#closest-word-input").type("word");
       cy.get(".dms-button").contains("Submit").click();
 
-      cy.wait(["@analogyTestUnauthed"]);
+      cy.wait(["@closestWordsUnauthed"]);
 
       cy.on("window:alert", (str) => {
         expect(str).to.equal("Your session has expired, Please sign in again.");
       });
     });
 
-    it("should show loading indicator while fetching results", () => {
-      cy.intercept(
-        {
-          method: "GET",
-          path: "/verify/analogy-test?word_a=word&word_b=facial&word_c=word&trained_model_id=15&count=500",
-        },
-        (req) => {
-          // Delay response so we catch loading indicator
-          req.on("response", (res) => {
-            res.setThrottle(1000);
-          });
-        },
-        {
-          fixture: "emptyArray",
-        }
-      ).as("delayedIntercept");
-
-      cy.get("#closest-word-input").type("word");
-      cy.get(".dms-button").contains("Submit").click();
-
-      cy.get(".dms-loading-indicator").should("exist");
-
-      cy.wait(["@delayedIntercept"]);
-    });
-
     it("should not show table if no results", () => {
       cy.intercept(
         {
           method: "GET",
-          path: "/verify/analogy-test?word_a=word&word_b=facial&word_c=word&trained_model_id=15&count=500",
+          path: "/verify/most-similar?word=word&count=100&trained_model_id=15",
         },
         {
           fixture: "emptyArray",
         }
-      ).as("analogyTest");
+      ).as("closestWords");
 
       cy.get("#closest-word-input").type("word");
       cy.get(".dms-button").contains("Submit").click();
 
-      cy.wait(["@analogyTest"]);
+      cy.wait(["@closestWords"]);
 
       cy.get("thbody").should("not.exist");
     });
@@ -215,38 +168,67 @@ describe("Analogy Test Page", () => {
       cy.intercept(
         {
           method: "GET",
-          path: "/verify/analogy-test?word_a=word&word_b=facial&word_c=word&trained_model_id=15&count=500",
+          path: "/verify/most-similar?word=word&count=100&trained_model_id=15",
         },
         {
-          fixture: "analogyTest",
+          fixture: "closestWords",
         }
-      ).as("analogyTest");
+      ).as("closestWords");
 
       cy.get("#closest-word-input").type("word");
       cy.get(".dms-button").contains("Submit").click();
 
-      cy.wait(["@analogyTest"]);
+      cy.wait(["@closestWords"]);
 
       cy.get("tbody").should("exist");
     });
 
-    it("should show newly entered word on successful API call", () => {
+    it("should show loading indicator while fetching results", () => {
       cy.intercept(
         {
           method: "GET",
-          path: "/verify/analogy-test?word_a=word&word_b=facial&word_c=word2&trained_model_id=15&count=500",
+          path: "/verify/most-similar?word=word&count=100&trained_model_id=15",
+        },
+        (req) => {
+          // Delay response so we catch loading indicator
+          req.on("response", (res) => {
+            res.setThrottle(1000);
+          });
         },
         {
-          fixture: "analogyTest",
+          fixture: "closestWords",
         }
-      ).as("analogyTest");
+      ).as("closestWordsDelayed");
 
-      cy.get("#closest-word-input").type("word2");
+      cy.get("#closest-word-input").type("word");
       cy.get(".dms-button").contains("Submit").click();
 
-      cy.wait(["@analogyTest"]);
+      cy.get(".dms-loading-indicator").should("exist");
 
-      cy.get(":nth-child(5) > .analogy-test-word-highlight").contains("word2");
+      cy.wait(["@closestWordsDelayed"]);
+    });
+
+    it("should route to analogy test page if a word is clicked", () => {
+      cy.intercept(
+        {
+          method: "GET",
+          path: "/verify/most-similar?word=word&count=100&trained_model_id=15",
+        },
+        {
+          fixture: "closestWords",
+        }
+      ).as("closestWords");
+
+      cy.get("#closest-word-input").type("word");
+      cy.get(".dms-button").contains("Submit").click();
+
+      cy.wait(["@closestWords"]);
+
+      cy.get("tbody").should("exist");
+
+      cy.get("tbody > :nth-child(2) > :nth-child(1)").click();
+
+      cy.url().should("include", "/analogyTest");
     });
   });
 });
